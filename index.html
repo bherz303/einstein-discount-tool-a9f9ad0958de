@@ -219,6 +219,64 @@
       accent-color: var(--red);
     }
 
+    /* ── CHOICES ROWS ── */
+    .choices-list {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin-bottom: 6px;
+    }
+
+    .choices-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .choices-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      flex-shrink: 0;
+      accent-color: var(--red);
+    }
+
+    .choices-badge {
+      width: 22px;
+      height: 22px;
+      background: var(--orange);
+      color: white;
+      font-size: 11px;
+      font-weight: 900;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0px;
+    }
+
+    .choices-row.other .choices-badge {
+      background: var(--gray);
+      font-size: 14px;
+    }
+
+    .choices-text strong {
+      display: block;
+      font-size: 13px;
+      color: var(--dark);
+      font-weight: 700;
+    }
+
+    .choices-text .choices-q {
+      display: block;
+      font-size: 12px;
+      color: var(--gray);
+      line-height: 1.4;
+      margin-top: 2px;
+    }
+
     .text-input-row {
       margin-top: 8px;
     }
@@ -263,8 +321,42 @@
     .verdict-explain {
       font-size: 13px;
       color: var(--gray);
-      margin-bottom: 18px;
+      margin-bottom: 10px;
       line-height: 1.5;
+    }
+
+    .value-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .value-chips:empty { margin-bottom: 0; }
+
+    .value-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #FFEDD5;
+      color: #c2410c;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 4px 10px 4px 6px;
+      border-radius: 20px;
+    }
+
+    .value-chip .value-chip-letter {
+      width: 16px;
+      height: 16px;
+      background: var(--orange);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 900;
     }
 
     .stat-grid {
@@ -544,18 +636,86 @@
         </div>
 
         <div class="card">
-          <h2>3. Service Issues</h2>
-          <div class="card-sub">Actual mistakes — separate from time math. Check any that apply.</div>
+          <h2>3. Service Issues — By CHOICES Value</h2>
+          <div class="card-sub">Was this a values breakdown, not just a time complaint? Check every value it traces back to — a real service issue often hits more than one.</div>
 
-          <div class="checkbox-group">
-            <label class="checkbox-row service"><input type="checkbox" onchange="recalc()" /> Late arrival beyond the window</label>
-            <label class="checkbox-row service"><input type="checkbox" onchange="recalc()" /> Property damage</label>
-            <label class="checkbox-row service"><input type="checkbox" onchange="recalc()" /> Unprofessional crew conduct</label>
-            <label class="checkbox-row service"><input type="checkbox" onchange="recalc()" /> Missed or wrong items</label>
-            <label class="checkbox-row service"><input type="checkbox" id="serviceOtherCheck" onchange="recalc()" /> Other service failure</label>
+          <div class="choices-list" id="choicesList">
+            <label class="choices-row">
+              <input type="checkbox" data-code="C" data-name="Communicate Clearly, Professionally, and with Kindness" onchange="recalc()" />
+              <span class="choices-badge">C</span>
+              <span class="choices-text">
+                <strong>Communicate Clearly, Professionally, and with Kindness</strong>
+                <span class="choices-q">Did we fail to communicate clearly with the customer — in the estimate, on site, or about any changes to expectations during the move?</span>
+              </span>
+            </label>
+
+            <label class="choices-row">
+              <input type="checkbox" data-code="H" data-name="Hustle but Don't Rush" onchange="recalc()" />
+              <span class="choices-badge">H</span>
+              <span class="choices-text">
+                <strong>Hustle but Don't Rush</strong>
+                <span class="choices-q">Was there an issue with the team's performance or hustle? Were they slow or not motivated to move?</span>
+              </span>
+            </label>
+
+            <label class="choices-row">
+              <input type="checkbox" data-code="O" data-name="Ownership Over Results" onchange="recalc()" />
+              <span class="choices-badge">O</span>
+              <span class="choices-text">
+                <strong>Ownership Over Results</strong>
+                <span class="choices-q">Did our team fail to take ownership — not creating a damage claim, or not bringing an issue or concern to the customer's attention?</span>
+              </span>
+            </label>
+
+            <label class="choices-row">
+              <input type="checkbox" data-code="I" data-name="Improve Everyday with Enthusiasm" onchange="recalc()" />
+              <span class="choices-badge">I</span>
+              <span class="choices-text">
+                <strong>Improve Everyday with Enthusiasm</strong>
+                <span class="choices-q">Did the team fail to adapt or problem-solve when something didn't go as planned on site — sticking with what wasn't working instead of finding a better way?</span>
+              </span>
+            </label>
+
+            <label class="choices-row">
+              <input type="checkbox" data-code="C2" data-name="Conscientious Attention to Detail" onchange="recalc()" />
+              <span class="choices-badge">C</span>
+              <span class="choices-text">
+                <strong>Conscientious Attention to Detail</strong>
+                <span class="choices-q">Did our team fail to capture details — pre-existing damage not noted, bolts/screws not put back, a bed not reassembled, boxes in the wrong rooms?</span>
+              </span>
+            </label>
+
+            <label class="choices-row">
+              <input type="checkbox" data-code="E" data-name="Elevate Attitudes and Have Fun" onchange="recalc()" />
+              <span class="choices-badge">E</span>
+              <span class="choices-text">
+                <strong>Elevate Attitudes and Have Fun</strong>
+                <span class="choices-q">Did the team fail to be happy on site, or fail to help the customer feel less stressed? Did our attitude make things worse instead of better?</span>
+              </span>
+            </label>
+
+            <label class="choices-row">
+              <input type="checkbox" data-code="S" data-name="Support One Another Generously" onchange="recalc()" />
+              <span class="choices-badge">S</span>
+              <span class="choices-text">
+                <strong>Support One Another Generously</strong>
+                <span class="choices-q">Did we miss a chance to go above and beyond — support the move or the customer in a way that wasn't strictly required, but would've helped?</span>
+              </span>
+            </label>
+
+            <label class="choices-row other">
+              <input type="checkbox" data-code="OTHER" data-name="Other (doesn't map to a CHOICES value)" onchange="recalc()" />
+              <span class="choices-badge">?</span>
+              <span class="choices-text">
+                <strong>Something else entirely</strong>
+                <span class="choices-q">A real issue that doesn't fit any value above — describe it in the notes below.</span>
+              </span>
+            </label>
           </div>
+
           <div class="text-input-row">
-            <input type="text" id="serviceOtherText" placeholder="Describe the other issue..." oninput="recalc()" />
+            <label style="font-size:11px; color:var(--gray); display:block; margin-bottom:6px;">Specifics — what happened, tied to the value(s) checked above</label>
+            <input type="text" id="serviceOtherText" placeholder="e.g. Crew didn't flag a scratched dresser before loading it (Attention to Detail)..." oninput="recalc()" />
           </div>
         </div>
 
@@ -570,6 +730,7 @@
 
           <div id="verdictBadge" class="verdict-badge green">Fill in the case facts</div>
           <div id="verdictExplain" class="verdict-explain">Start with Section 1 — the time and pricing facts drive everything else.</div>
+          <div id="valueChips" class="value-chips"></div>
 
           <div class="stat-grid">
             <div class="stat-box">
@@ -652,6 +813,8 @@
 
       const hasDelay = collectChecks(delayCard);
       const hasService = collectChecks(serviceCard);
+      const checkedValues = Array.from(serviceCard.querySelectorAll('input[type="checkbox"]:checked'))
+        .map(cb => ({ code: cb.dataset.code, name: cb.dataset.name }));
 
       const variance = actualHrs && estOnSite ? actualHrs - estOnSite : 0;
       const rate = actualHrs > 0 ? moveTotal / actualHrs : 0;
@@ -677,10 +840,10 @@
         if (hasService) {
           verdict = 'Service Issue — Not a Time Dispute';
           verdictClass = 'red';
-          explain = 'This isn\'t primarily a time-and-estimate question — there\'s an actual service failure. Time math still matters for context, but the discount should reflect the severity of the issue, not just the hours.';
+          explain = 'This isn\'t primarily a time-and-estimate question — it traces back to a core values breakdown on site. Time math still matters for context, but the discount should reflect the severity of the issue, not just the hours. Use the value(s) below to guide the coaching conversation with the crew, separate from what you offer the customer.';
           recPct = 10;
           recDollar = moveTotal * 0.10;
-          note = 'Starting point only — use judgment on severity. Document the specific failure regardless of the dollar amount.';
+          note = 'Starting point only — use judgment on severity and how many values were hit. Document the specific failure regardless of the dollar amount.';
           script = 'I\'m sorry this happened — this isn\'t the standard we hold ourselves to. Let me look into exactly what went wrong and I\'ll follow up tomorrow with how we\'re going to make it right.';
         } else if (variance <= 0) {
           verdict = 'Pricing Was Fair';
@@ -720,6 +883,16 @@
       document.getElementById('verdictBadge').textContent = verdict;
       document.getElementById('verdictBadge').className = 'verdict-badge ' + verdictClass;
       document.getElementById('verdictExplain').textContent = explain;
+
+      const chipsEl = document.getElementById('valueChips');
+      if (hasService && checkedValues.length) {
+        chipsEl.innerHTML = checkedValues.map(v =>
+          '<span class="value-chip"><span class="value-chip-letter">' + v.code.replace('2','').replace('OTHER','?') + '</span>' + v.name + '</span>'
+        ).join('');
+      } else {
+        chipsEl.innerHTML = '';
+      }
+
       document.getElementById('recNote').textContent = note;
       document.getElementById('scriptText').textContent = script;
 
@@ -737,7 +910,7 @@
         updateSliderDisplay(moveTotal);
       }
 
-      buildSummary(moveTotal, estOriginal, estOnSite, actualHrs, hasDelay, hasService, verdict, recPct, recDollar, escalate);
+      buildSummary(moveTotal, estOriginal, estOnSite, actualHrs, hasDelay, hasService, checkedValues, verdict, recPct, recDollar, escalate);
     }
 
     function onSlider() {
@@ -763,7 +936,7 @@
       recalc();
     }
 
-    function buildSummary(moveTotal, estOriginal, estOnSite, actualHrs, hasDelay, hasService, verdict, recPct, recDollar, escalate) {
+    function buildSummary(moveTotal, estOriginal, estOnSite, actualHrs, hasDelay, hasService, checkedValues, verdict, recPct, recDollar, escalate) {
       const delayOtherText = document.getElementById('delayOtherText').value.trim();
       const serviceOtherText = document.getElementById('serviceOtherText').value.trim();
       const offerPct = parseFloat(document.getElementById('offerSlider').value) || 0;
@@ -772,11 +945,9 @@
 
       const delayNotes = Array.from(document.querySelectorAll('.intake-col .card'))[1]
         .querySelectorAll('input[type="checkbox"]:checked');
-      const serviceNotes = Array.from(document.querySelectorAll('.intake-col .card'))[2]
-        .querySelectorAll('input[type="checkbox"]:checked');
 
       const delayLabels = Array.from(delayNotes).map(cb => cb.closest('label').textContent.trim());
-      const serviceLabels = Array.from(serviceNotes).map(cb => cb.closest('label').textContent.trim());
+      const valueLabels = checkedValues.map(v => v.name);
 
       let lines = [];
       lines.push('DISCOUNT CASE SUMMARY');
@@ -784,13 +955,17 @@
       lines.push('Original estimate: ' + (estOriginal || 0).toFixed(1) + ' hrs | On-site estimate: ' + (estOnSite || 0).toFixed(1) + ' hrs | Actual: ' + (actualHrs || 0).toFixed(1) + ' hrs');
       lines.push('');
       lines.push('Delay factors: ' + (delayLabels.length ? delayLabels.join('; ') : 'None noted') + (delayOtherText ? ' — ' + delayOtherText : ''));
-      lines.push('Service issues: ' + (serviceLabels.length ? serviceLabels.join('; ') : 'None noted') + (serviceOtherText ? ' — ' + serviceOtherText : ''));
+      lines.push('CHOICES values implicated: ' + (valueLabels.length ? valueLabels.join('; ') : 'None noted') + (serviceOtherText ? ' — ' + serviceOtherText : ''));
       lines.push('');
       lines.push('Verdict: ' + verdict);
       lines.push('System recommendation: ' + fmtPct(recPct) + ' (' + fmtDollar(recDollar) + ')');
       lines.push('Offer selected: ' + fmtPct(offerPct) + ' (' + fmtDollar(offerDollar) + ')');
       if (offerEscalate) {
         lines.push('ESCALATION REQUIRED — offer exceeds 15% of move total. Reviewed with RM/Claims: ___________');
+      }
+      if (valueLabels.length) {
+        lines.push('');
+        lines.push('Coaching follow-up (separate from customer resolution): address ' + valueLabels.join(', ') + ' with the crew.');
       }
 
       document.getElementById('summaryText').value = lines.join('\n');
