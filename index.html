@@ -208,6 +208,51 @@
       font-style: italic;
     }
 
+    .field-group {
+      margin-bottom: 14px;
+    }
+
+    .field-group-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .field-trio {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .field-trio.duo {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .trio-field label {
+      font-size: 10.5px;
+      color: var(--gray);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .trio-field input {
+      width: 100%;
+      padding: 8px 9px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: 'Roboto', sans-serif;
+      color: var(--dark);
+    }
+
+    .trio-field input:focus {
+      outline: none;
+      border-color: var(--blue);
+    }
+
     .checkbox-group {
       display: flex;
       flex-direction: column;
@@ -233,6 +278,15 @@
 
     .checkbox-row.service input[type="checkbox"] {
       accent-color: var(--red);
+    }
+
+    .checkbox-row.damage input[type="checkbox"] {
+      accent-color: var(--blue);
+    }
+
+    .checkbox-row.damage {
+      font-weight: 700;
+      color: var(--dark);
     }
 
     /* ── CHOICES ROWS ── */
@@ -291,6 +345,27 @@
       color: var(--gray);
       line-height: 1.4;
       margin-top: 2px;
+    }
+
+    .choices-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .choices-note {
+      margin-left: 32px;
+      padding: 7px 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-family: 'Roboto', sans-serif;
+      color: var(--dark);
+    }
+
+    .choices-note:focus {
+      outline: none;
+      border-color: var(--blue);
     }
 
     .text-input-row {
@@ -464,6 +539,22 @@
 
     .escalate-flag.show { display: block; }
 
+    .claims-flag {
+      display: none;
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      border-left: 4px solid var(--blue);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 12.5px;
+      color: #1e40af;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .claims-flag.show { display: block; }
+
     /* ── SLIDER ── */
     .slider-block {
       margin-bottom: 18px;
@@ -579,6 +670,7 @@
       .field-row { flex-direction: column; align-items: flex-start; }
       .field-row label { width: auto; }
       .field-hint { margin-left: 0; }
+      .field-trio { grid-template-columns: 1fr; }
       .header { flex-direction: column; align-items: flex-start; }
     }
   </style>
@@ -642,33 +734,68 @@
 
         <div class="card" id="pricingCard">
           <h2>2. Time &amp; Pricing</h2>
-          <div class="card-sub">Pull these straight from the contract and the job in EMMA.</div>
+          <div class="card-sub">Pull these straight from the contract and the job in EMMA. Estimates are in dollars so they're directly comparable to what was actually charged.</div>
+
+          <div class="field-group">
+            <div class="field-group-label">Original Estimate</div>
+            <div class="field-trio">
+              <div class="trio-field">
+                <label for="estOriginalDollars">$</label>
+                <input type="number" id="estOriginalDollars" placeholder="e.g. 1300" oninput="recalc()" />
+              </div>
+              <div class="trio-field">
+                <label for="estOriginalMovers">Movers</label>
+                <input type="number" id="estOriginalMovers" placeholder="e.g. 3" oninput="recalc()" />
+              </div>
+              <div class="trio-field">
+                <label for="estOriginalHours">Hours</label>
+                <input type="number" id="estOriginalHours" step="0.5" placeholder="e.g. 6.0" oninput="recalc()" />
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="field-group-label">On-Site Estimate</div>
+            <div class="field-trio">
+              <div class="trio-field">
+                <label for="estOnSiteDollars">$</label>
+                <input type="number" id="estOnSiteDollars" placeholder="e.g. 1200" oninput="recalc()" />
+              </div>
+              <div class="trio-field">
+                <label for="estOnSiteMovers">Movers</label>
+                <input type="number" id="estOnSiteMovers" placeholder="e.g. 3" oninput="recalc()" />
+              </div>
+              <div class="trio-field">
+                <label for="estOnSiteHours">Hours</label>
+                <input type="number" id="estOnSiteHours" step="0.5" placeholder="e.g. 5.5" oninput="recalc()" />
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="field-group-label">Actual</div>
+            <div class="field-trio duo">
+              <div class="trio-field">
+                <label for="actualMovers">Movers</label>
+                <input type="number" id="actualMovers" placeholder="e.g. 3" oninput="recalc()" />
+              </div>
+              <div class="trio-field">
+                <label for="actualHrs">Hours</label>
+                <input type="number" id="actualHrs" step="0.5" placeholder="e.g. 5.0" oninput="recalc()" />
+              </div>
+            </div>
+          </div>
 
           <div class="field-row">
-            <label for="moveTotal">Move total charged ($)</label>
+            <label for="moveTotal">Total move charges ($)</label>
             <input type="number" id="moveTotal" placeholder="e.g. 1200" oninput="recalc()" />
           </div>
-
-          <div class="field-row">
-            <label for="estOriginal">Original estimate (hrs)</label>
-            <input type="number" id="estOriginal" step="0.5" placeholder="e.g. 6.0" oninput="recalc()" />
-          </div>
-
-          <div class="field-row">
-            <label for="estOnSite">On-site estimate (hrs)</label>
-            <input type="number" id="estOnSite" step="0.5" placeholder="e.g. 5.5" oninput="recalc()" />
-          </div>
-
-          <div class="field-row">
-            <label for="actualHrs">Actual time (hrs)</label>
-            <input type="number" id="actualHrs" step="0.5" placeholder="e.g. 5.0" oninput="recalc()" />
-          </div>
-          <div class="field-hint">The on-site estimate is what the crew is actually held to — that's the comparison that matters.</div>
+          <div class="field-hint">The on-site estimate ($) is what the crew is actually held to — that dollar comparison drives the recommendation. Hours and movers are context.</div>
         </div>
 
         <div class="card" id="delayCard">
           <h2>3. Legitimate Delay Factors</h2>
-          <div class="card-sub">Things that justify extra time — not the crew's fault. Each one checked here cancels out one value issue below, 1-for-1.</div>
+          <div class="card-sub">Things that justify extra time — not the crew's fault. It takes 2 legit factors checked here to cancel out one value issue below (2-to-1) — a real values breakdown outweighs a reasonable delay.</div>
 
           <div class="checkbox-group">
             <label class="checkbox-row"><input type="checkbox" onchange="recalc()" /> Furniture disassembly/reassembly (beds, cribs, exercise equipment)</label>
@@ -685,85 +812,120 @@
 
         <div class="card" id="serviceCard">
           <h2>4. Service Issues — By CHOICES Value</h2>
-          <div class="card-sub">Was this a values breakdown, not just a time complaint? Check every value it traces back to — a real service issue often hits more than one. Each checked value adds 5% to the recommendation; legit delay factors above cancel them out 1-for-1.</div>
+          <div class="card-sub">Was this a values breakdown, not just a time complaint? Check every value it traces back to — a real service issue often hits more than one. Each checked value adds 5%; it takes 2 legit delay factors above to cancel one out (2-to-1) — service breakdowns are weighted heavier on purpose.</div>
+          <div class="card-sub" style="margin-top:-10px; font-style:italic;">If a legit delay factor is checked but the customer is still upset, that's usually a Communicate Clearly or Improve Everyday miss on our part — check that value too if it applies. A good reason for the delay doesn't excuse a bad reset of expectations.</div>
 
           <div class="choices-list" id="choicesList">
-            <label class="choices-row">
-              <input type="checkbox" data-code="C" data-name="Communicate Clearly, Professionally, and with Kindness" onchange="recalc()" />
-              <span class="choices-badge">C</span>
-              <span class="choices-text">
-                <strong>Communicate Clearly, Professionally, and with Kindness</strong>
-                <span class="choices-q">Did we fail to communicate clearly with the customer — in the estimate, on site, or about any changes to expectations during the move?</span>
-              </span>
-            </label>
+            <div class="choices-item">
+              <label class="choices-row">
+                <input type="checkbox" data-code="C" data-name="Communicate Clearly, Professionally, and with Kindness" onchange="recalc()" />
+                <span class="choices-badge">C</span>
+                <span class="choices-text">
+                  <strong>Communicate Clearly, Professionally, and with Kindness</strong>
+                  <span class="choices-q">Did we fail to communicate clearly with the customer — in the estimate, on site, or about any changes to expectations during the move?</span>
+                </span>
+              </label>
+              <input type="text" class="choices-note" id="note-C" placeholder="Details for this miss..." oninput="recalc()" />
+            </div>
 
-            <label class="choices-row">
-              <input type="checkbox" data-code="H" data-name="Hustle but Don't Rush" onchange="recalc()" />
-              <span class="choices-badge">H</span>
-              <span class="choices-text">
-                <strong>Hustle but Don't Rush</strong>
-                <span class="choices-q">Was there an issue with the team's performance or hustle? Were they slow or not motivated to move?</span>
-              </span>
-            </label>
+            <div class="choices-item">
+              <label class="choices-row">
+                <input type="checkbox" data-code="H" data-name="Hustle but Don't Rush" onchange="recalc()" />
+                <span class="choices-badge">H</span>
+                <span class="choices-text">
+                  <strong>Hustle but Don't Rush</strong>
+                  <span class="choices-q">Was there an issue with the team's performance or hustle? Were they slow or not motivated to move?</span>
+                </span>
+              </label>
+              <input type="text" class="choices-note" id="note-H" placeholder="Details for this miss..." oninput="recalc()" />
+            </div>
 
-            <label class="choices-row">
-              <input type="checkbox" data-code="O" data-name="Ownership Over Results" onchange="recalc()" />
-              <span class="choices-badge">O</span>
-              <span class="choices-text">
-                <strong>Ownership Over Results</strong>
-                <span class="choices-q">Did our team fail to take ownership — not creating a damage claim, or not bringing an issue or concern to the customer's attention?</span>
-              </span>
-            </label>
+            <div class="choices-item">
+              <label class="choices-row">
+                <input type="checkbox" data-code="O" data-name="Ownership Over Results" onchange="recalc()" />
+                <span class="choices-badge">O</span>
+                <span class="choices-text">
+                  <strong>Ownership Over Results</strong>
+                  <span class="choices-q">Did our team fail to take ownership — not creating a damage claim, or not bringing an issue or concern to the customer's attention?</span>
+                </span>
+              </label>
+              <input type="text" class="choices-note" id="note-O" placeholder="Details for this miss..." oninput="recalc()" />
+            </div>
 
-            <label class="choices-row">
-              <input type="checkbox" data-code="I" data-name="Improve Everyday with Enthusiasm" onchange="recalc()" />
-              <span class="choices-badge">I</span>
-              <span class="choices-text">
-                <strong>Improve Everyday with Enthusiasm</strong>
-                <span class="choices-q">Did the team fail to adapt or problem-solve when something didn't go as planned on site — sticking with what wasn't working instead of finding a better way?</span>
-              </span>
-            </label>
+            <div class="choices-item">
+              <label class="choices-row">
+                <input type="checkbox" data-code="I" data-name="Improve Everyday with Enthusiasm" onchange="recalc()" />
+                <span class="choices-badge">I</span>
+                <span class="choices-text">
+                  <strong>Improve Everyday with Enthusiasm</strong>
+                  <span class="choices-q">Did the team fail to adapt or problem-solve when something didn't go as planned on site — sticking with what wasn't working instead of finding a better way?</span>
+                </span>
+              </label>
+              <input type="text" class="choices-note" id="note-I" placeholder="Details for this miss..." oninput="recalc()" />
+            </div>
 
-            <label class="choices-row">
-              <input type="checkbox" data-code="C2" data-name="Conscientious Attention to Detail" onchange="recalc()" />
-              <span class="choices-badge">C</span>
-              <span class="choices-text">
-                <strong>Conscientious Attention to Detail</strong>
-                <span class="choices-q">Did our team fail to capture details — pre-existing damage not noted, bolts/screws not put back, a bed not reassembled, boxes in the wrong rooms?</span>
-              </span>
-            </label>
+            <div class="choices-item">
+              <label class="choices-row">
+                <input type="checkbox" data-code="C2" data-name="Conscientious Attention to Detail" onchange="recalc()" />
+                <span class="choices-badge">C</span>
+                <span class="choices-text">
+                  <strong>Conscientious Attention to Detail</strong>
+                  <span class="choices-q">Did our team fail to capture details — pre-existing damage not noted, bolts/screws not put back, a bed not reassembled, boxes in the wrong rooms?</span>
+                </span>
+              </label>
+              <input type="text" class="choices-note" id="note-C2" placeholder="Details for this miss..." oninput="recalc()" />
+            </div>
 
-            <label class="choices-row">
-              <input type="checkbox" data-code="E" data-name="Elevate Attitudes and Have Fun" onchange="recalc()" />
-              <span class="choices-badge">E</span>
-              <span class="choices-text">
-                <strong>Elevate Attitudes and Have Fun</strong>
-                <span class="choices-q">Did the team fail to be happy on site, or fail to help the customer feel less stressed? Did our attitude make things worse instead of better?</span>
-              </span>
-            </label>
+            <div class="choices-item">
+              <label class="choices-row">
+                <input type="checkbox" data-code="E" data-name="Elevate Attitudes and Have Fun" onchange="recalc()" />
+                <span class="choices-badge">E</span>
+                <span class="choices-text">
+                  <strong>Elevate Attitudes and Have Fun</strong>
+                  <span class="choices-q">Did the team fail to be happy on site, or fail to help the customer feel less stressed? Did our attitude make things worse instead of better?</span>
+                </span>
+              </label>
+              <input type="text" class="choices-note" id="note-E" placeholder="Details for this miss..." oninput="recalc()" />
+            </div>
 
-            <label class="choices-row">
-              <input type="checkbox" data-code="S" data-name="Support One Another Generously" onchange="recalc()" />
-              <span class="choices-badge">S</span>
-              <span class="choices-text">
-                <strong>Support One Another Generously</strong>
-                <span class="choices-q">Did we miss a chance to go above and beyond — support the move or the customer in a way that wasn't strictly required, but would've helped?</span>
-              </span>
-            </label>
+            <div class="choices-item">
+              <label class="choices-row">
+                <input type="checkbox" data-code="S" data-name="Support One Another Generously" onchange="recalc()" />
+                <span class="choices-badge">S</span>
+                <span class="choices-text">
+                  <strong>Support One Another Generously</strong>
+                  <span class="choices-q">Did we miss a chance to go above and beyond — support the move or the customer in a way that wasn't strictly required, but would've helped?</span>
+                </span>
+              </label>
+              <input type="text" class="choices-note" id="note-S" placeholder="Details for this miss..." oninput="recalc()" />
+            </div>
 
-            <label class="choices-row other">
-              <input type="checkbox" data-code="OTHER" data-name="Other (doesn't map to a CHOICES value)" onchange="recalc()" />
-              <span class="choices-badge">?</span>
-              <span class="choices-text">
-                <strong>Something else entirely</strong>
-                <span class="choices-q">A real issue that doesn't fit any value above — describe it in the notes below.</span>
-              </span>
-            </label>
+            <div class="choices-item">
+              <label class="choices-row other">
+                <input type="checkbox" data-code="OTHER" data-name="Other (doesn't map to a CHOICES value)" onchange="recalc()" />
+                <span class="choices-badge">?</span>
+                <span class="choices-text">
+                  <strong>Something else entirely</strong>
+                  <span class="choices-q">A real issue that doesn't fit any value above — describe it in the notes.</span>
+                </span>
+              </label>
+              <input type="text" class="choices-note" id="note-OTHER" placeholder="Details for this miss..." oninput="recalc()" />
+            </div>
           </div>
+        </div>
+
+        <div class="card" id="damageCard">
+          <h2>5. Damage Claim Status</h2>
+          <div class="card-sub">If Claims is already involved, this discount can't be decided on its own.</div>
+
+          <label class="checkbox-row damage">
+            <input type="checkbox" id="damageFiledCheck" onchange="recalc()" />
+            A damage claim has already been filed for this move
+          </label>
 
           <div class="text-input-row">
-            <label style="font-size:11px; color:var(--gray); display:block; margin-bottom:6px;">Specifics — what happened, tied to the value(s) checked above</label>
-            <input type="text" id="serviceOtherText" placeholder="e.g. Crew didn't flag a scratched dresser before loading it (Attention to Detail)..." oninput="recalc()" />
+            <label style="font-size:11px; color:var(--gray); display:block; margin:10px 0 6px;">Claim notes (claim #, adjuster, amount pending, status)</label>
+            <input type="text" id="damageNotesText" placeholder="e.g. Claim #4521 filed 7/8, adjuster assigned, damage estimate pending..." oninput="recalc()" />
           </div>
         </div>
 
@@ -782,11 +944,11 @@
 
           <div class="stat-grid">
             <div class="stat-box">
-              <span class="stat-label">Vs. On-Site Estimate</span>
+              <span class="stat-label">Vs. On-Site Estimate ($)</span>
               <span class="stat-value" id="statVariance">—</span>
             </div>
             <div class="stat-box">
-              <span class="stat-label">Effective Hourly Rate</span>
+              <span class="stat-label">Vs. On-Site Estimate (hrs)</span>
               <span class="stat-value" id="statRate">—</span>
             </div>
           </div>
@@ -801,6 +963,8 @@
           </div>
 
           <div class="escalate-flag" id="escalateFlag">⚠️ This exceeds 15% of the move total. Do not offer this yourself — review with your Regional Manager and/or the Claims department head first.</div>
+
+          <div class="claims-flag" id="claimsFlag">🗂️ A damage claim is already filed for this move. Discuss this discount with the Claims department before finalizing — the total resolution (this discount plus whatever Claims pays out) needs to be decided together, not as two separate numbers.</div>
 
           <div class="slider-block">
             <div class="slider-label"><span>Adjust the actual offer</span><strong id="sliderVal">0.0%</strong></div>
@@ -849,14 +1013,25 @@
       return container.querySelectorAll('input[type="checkbox"]:checked').length;
     }
 
+    function getNoteText(code) {
+      const el = document.getElementById('note-' + code);
+      return el ? el.value.trim() : '';
+    }
+
     function recalc() {
       const delayCard = document.getElementById('delayCard');
       const serviceCard = document.getElementById('serviceCard');
       const branch = document.getElementById('branchSelect').value;
+      const damageFiled = document.getElementById('damageFiledCheck').checked;
 
       const moveTotal = parseFloat(document.getElementById('moveTotal').value) || 0;
-      const estOriginal = parseFloat(document.getElementById('estOriginal').value) || 0;
-      const estOnSite = parseFloat(document.getElementById('estOnSite').value) || 0;
+      const estOriginalDollars = parseFloat(document.getElementById('estOriginalDollars').value) || 0;
+      const estOriginalMovers = parseFloat(document.getElementById('estOriginalMovers').value) || 0;
+      const estOriginalHours = parseFloat(document.getElementById('estOriginalHours').value) || 0;
+      const estOnSiteDollars = parseFloat(document.getElementById('estOnSiteDollars').value) || 0;
+      const estOnSiteMovers = parseFloat(document.getElementById('estOnSiteMovers').value) || 0;
+      const estOnSiteHours = parseFloat(document.getElementById('estOnSiteHours').value) || 0;
+      const actualMovers = parseFloat(document.getElementById('actualMovers').value) || 0;
       const actualHrs = parseFloat(document.getElementById('actualHrs').value) || 0;
 
       const delayCount = countChecks(delayCard);
@@ -864,23 +1039,33 @@
       const hasDelay = delayCount > 0;
       const hasService = serviceCount > 0;
       const checkedValues = Array.from(serviceCard.querySelectorAll('input[type="checkbox"]:checked'))
-        .map(cb => ({ code: cb.dataset.code, name: cb.dataset.name }));
+        .map(cb => ({ code: cb.dataset.code, name: cb.dataset.name, note: getNoteText(cb.dataset.code) }));
 
-      const VALUE_WEIGHT = 5; // % of move total per checked value issue; each legit delay factor cancels one 1-for-1
-      const canceledCount = Math.min(serviceCount, delayCount);
-      const netServiceCount = Math.max(0, serviceCount - delayCount);
-      const netServicePct = netServiceCount * VALUE_WEIGHT;
+      const SERVICE_WEIGHT = 5;      // % of move total per checked value issue
+      const DELAY_OFFSET_WEIGHT = 2.5; // % offset per legit delay factor — takes 2 delay factors to cancel 1 value issue (2-to-1)
+      const grossServicePct = serviceCount * SERVICE_WEIGHT;
+      const delayOffsetPct = delayCount * DELAY_OFFSET_WEIGHT;
+      const canceledPct = Math.min(grossServicePct, delayOffsetPct);
+      const netServicePct = Math.max(0, grossServicePct - delayOffsetPct);
 
-      const variance = actualHrs && estOnSite ? actualHrs - estOnSite : 0;
+      // Dollars are now the primary comparison — directly comparable to what was actually charged.
+      // Hours stay in as operational context but no longer drive the math.
+      const moneyVariance = (moveTotal && estOnSiteDollars) ? moveTotal - estOnSiteDollars : 0;
+      const hoursVariance = (actualHrs && estOnSiteHours) ? actualHrs - estOnSiteHours : 0;
       const rate = actualHrs > 0 ? moveTotal / actualHrs : 0;
 
       document.getElementById('statVariance').textContent =
-        actualHrs && estOnSite ? (variance > 0 ? '+' : '') + variance.toFixed(1) + ' hrs' : '—';
+        (moveTotal && estOnSiteDollars) ? (moneyVariance > 0 ? '+' : '') + fmtDollar(moneyVariance) : '—';
       document.getElementById('statVariance').parentElement.classList.remove('pos', 'neg');
-      if (actualHrs && estOnSite) {
-        document.getElementById('statVariance').parentElement.classList.add(variance > 0 ? 'pos' : 'neg');
+      if (moveTotal && estOnSiteDollars) {
+        document.getElementById('statVariance').parentElement.classList.add(moneyVariance > 0 ? 'pos' : 'neg');
       }
-      document.getElementById('statRate').textContent = rate ? fmtDollar(rate) + '/hr' : '—';
+      document.getElementById('statRate').textContent =
+        (actualHrs && estOnSiteHours) ? (hoursVariance > 0 ? '+' : '') + hoursVariance.toFixed(1) + ' hrs' : '—';
+      document.getElementById('statRate').parentElement.classList.remove('pos', 'neg');
+      if (actualHrs && estOnSiteHours) {
+        document.getElementById('statRate').parentElement.classList.add(hoursVariance > 0 ? 'pos' : 'neg');
+      }
 
       let verdict = 'Fill in the case facts';
       let verdictClass = 'green';
@@ -891,41 +1076,42 @@
       let script = 'Fill in the case facts above to get suggested language.';
       let driver = 'none';
 
-      if (moveTotal > 0 && actualHrs > 0 && estOnSite > 0) {
+      if (moveTotal > 0 && actualHrs > 0 && estOnSiteDollars > 0) {
 
-        // Time-based component — always computed so it can be compared against the values-based number
+        // Time-based component — always computed so it can be compared against the values-based number.
+        // Driven by dollars now (on-site estimate $ vs total charged $), not hours × an estimated rate.
         let timeBasedPct = 0, timeBasedDollar = 0, timeVerdict, timeClass, timeExplain, timeNote, timeScript;
 
-        if (variance <= 0) {
+        if (moneyVariance <= 0) {
           timeVerdict = 'Pricing Was Fair';
           timeClass = 'green';
-          timeExplain = 'The crew finished at or under the on-site estimate. There\'s no time-based overage to discount. Take the facts back to the customer before offering anything.';
+          timeExplain = 'The total charge came in at or under the on-site estimate. There\'s no dollar-based overage to discount. Take the facts back to the customer before offering anything.';
           timeBasedPct = (hasDelay && !hasService) ? 5 : 0;
           timeBasedDollar = moveTotal * (timeBasedPct / 100);
           timeNote = hasDelay
             ? 'Optional goodwill only — use if the customer is still unhappy after hearing the facts. Not required.'
             : 'No discount is warranted based on the numbers. Explain the facts first — only consider a small goodwill gesture if they still push back.';
-          timeScript = 'Your original estimate was ' + (estOriginal || estOnSite).toFixed(1) + ' hours, the on-site estimate was ' + estOnSite.toFixed(1) + ', and the crew finished in ' + actualHrs.toFixed(1) + ' — under estimate. ' +
-            (hasDelay ? 'That includes some extra work along the way that the crew absorbed without adding time.' : '');
+          timeScript = 'Your on-site estimate was ' + fmtDollar(estOnSiteDollars) + ', and the total charge came to ' + fmtDollar(moveTotal) + ' — at or under estimate. That was ' + actualHrs.toFixed(1) + ' hours' + (actualMovers ? ' with ' + actualMovers + ' movers' : '') + '. ' +
+            (hasDelay ? 'That includes some extra work along the way that the crew absorbed without adding cost.' : '');
         } else {
-          const overageDollars = variance * rate;
+          const overageDollars = moneyVariance;
 
           if (hasDelay) {
             timeVerdict = 'Overage — Explained by Legitimate Factors';
             timeClass = 'yellow';
-            timeExplain = 'The crew went over the on-site estimate, but there\'s a real reason (disassembly, access, extra items, etc.). Explain the facts first — if they still push back, split the difference on the overage rather than discounting the whole move.';
+            timeExplain = 'The total charge went over the on-site estimate, but there\'s a real reason (disassembly, access, extra items, etc.). Explain the facts first — if they still push back, split the difference on the overage rather than discounting the whole move.';
             timeBasedDollar = overageDollars / 2;
             timeBasedPct = moveTotal > 0 ? (timeBasedDollar / moveTotal) * 100 : 0;
             timeNote = 'Split-the-difference tactic: half of the overage (' + fmtDollar(overageDollars) + ' total) is a fair starting offer if they still don\'t want to pay after hearing the facts.';
-            timeScript = 'We did run over the on-site estimate here because of the extra work involved. Instead of you covering all of that extra time, let\'s split it — you\'d pay half of the difference between the estimate and the actual charge.';
+            timeScript = 'We did come in over the on-site estimate (' + fmtDollar(estOnSiteDollars) + ' estimated vs. ' + fmtDollar(moveTotal) + ' charged) here because of the extra work involved. Instead of you covering all of that difference, let\'s split it — you\'d pay half.';
           } else {
             timeVerdict = 'Overage — Not Fully Explained';
             timeClass = 'orange';
-            timeExplain = 'The crew went over the on-site estimate and there\'s no documented reason for it. This leans toward covering the overage rather than a token discount — talk to the crew before finalizing.';
+            timeExplain = 'The total charge went over the on-site estimate and there\'s no documented reason for it. This leans toward covering the overage rather than a token discount — talk to the crew before finalizing.';
             timeBasedDollar = overageDollars;
             timeBasedPct = moveTotal > 0 ? (timeBasedDollar / moveTotal) * 100 : 0;
             timeNote = 'This equals covering the full overage (' + fmtDollar(overageDollars) + '). Confirm with the crew first — there may be a factor that wasn\'t captured on the intake form.';
-            timeScript = 'I want to run this down with the crew before I give you a final number — I\'ll call you back tomorrow. Based on what I\'m seeing so far, we did run longer than expected without a clear reason, and I want to make that right.';
+            timeScript = 'I want to run this down with the crew before I give you a final number — I\'ll call you back tomorrow. Based on what I\'m seeing so far, the charge came in over the on-site estimate (' + fmtDollar(estOnSiteDollars) + ' vs. ' + fmtDollar(moveTotal) + ') without a clear reason, and I want to make that right.';
           }
         }
 
@@ -939,7 +1125,7 @@
           explain = severe
             ? 'This many unresolved values issues is a pattern, not a one-off — it goes past a simple discount conversation. Loop in your Regional Manager and/or the Claims department head before you go back to the customer, and open a separate coaching/HR conversation with the crew.'
             : 'This isn\'t primarily a time-and-estimate question — it traces back to a core values breakdown on site. Use the value(s) below to guide the coaching conversation with the crew, separate from what you offer the customer.';
-          note = serviceCount + ' value issue(s) × 5%' + (canceledCount ? ' − ' + canceledCount + ' legit factor(s) canceled 1-for-1' : '') + ' = ' + fmtPct(netServicePct) + '. Starting point only — use judgment on severity beyond the math.';
+          note = serviceCount + ' issue(s) × 5% = ' + fmtPct(grossServicePct) + (delayCount ? ' − ' + delayCount + ' legit factor(s) × 2.5% (2-to-1 offset) = ' + fmtPct(canceledPct) + ' canceled' : '') + ' → net ' + fmtPct(netServicePct) + '. Starting point only — use judgment on severity beyond the math.';
           script = 'I\'m sorry this happened — this isn\'t the standard we hold ourselves to. Let me look into exactly what went wrong and I\'ll follow up tomorrow with how we\'re going to make it right.';
         } else {
           driver = 'time';
@@ -951,7 +1137,7 @@
           note = timeNote;
           script = timeScript;
           if (hasService && netServicePct === 0) {
-            note += ' (' + serviceCount + ' value issue(s) noted but fully offset by ' + delayCount + ' legitimate delay factor(s) — no separate values-based discount.)';
+            note += ' (' + serviceCount + ' value issue(s) noted but fully offset by ' + delayCount + ' legitimate delay factor(s) at 2-to-1 — no separate values-based discount.)';
           }
         }
       }
@@ -963,12 +1149,16 @@
       const chipsEl = document.getElementById('valueChips');
       if (hasService && checkedValues.length) {
         chipsEl.innerHTML = checkedValues.map(v =>
-          '<span class="value-chip"><span class="value-chip-letter">' + v.code.replace('2','').replace('OTHER','?') + '</span>' + v.name + '</span>'
-        ).join('') + (netServiceCount < serviceCount
-          ? '<span class="value-chip offset">' + canceledCount + ' offset by legit factor(s)</span>'
+          '<span class="value-chip" title="' + (v.note ? v.note.replace(/"/g, '&quot;') : 'No details entered yet') + '"><span class="value-chip-letter">' + v.code.replace('2','').replace('OTHER','?') + '</span>' + v.name + '</span>'
+        ).join('') + (canceledPct > 0
+          ? '<span class="value-chip offset">' + fmtPct(canceledPct) + ' offset by legit factor(s) (2-to-1)</span>'
           : '');
       } else {
         chipsEl.innerHTML = '';
+      }
+
+      if (damageFiled) {
+        note += ' Note: a damage claim is already filed — this number excludes any separate claims payout. Coordinate with Claims on the total resolution before finalizing.';
       }
 
       document.getElementById('recNote').textContent = note;
@@ -980,6 +1170,7 @@
 
       const escalate = recPct > 15;
       document.getElementById('escalateFlag').classList.toggle('show', escalate);
+      document.getElementById('claimsFlag').classList.toggle('show', damageFiled);
 
       if (!userMovedSlider) {
         document.getElementById('offerSlider').value = Math.min(Math.round(recPct * 2) / 2, 25);
@@ -988,7 +1179,7 @@
         updateSliderDisplay(moveTotal);
       }
 
-      buildSummary(branch, moveTotal, estOriginal, estOnSite, actualHrs, hasDelay, hasService, checkedValues, verdict, recPct, recDollar, escalate, driver, serviceCount, delayCount, canceledCount, netServicePct);
+      buildSummary(branch, moveTotal, estOriginalDollars, estOriginalMovers, estOriginalHours, estOnSiteDollars, estOnSiteMovers, estOnSiteHours, actualMovers, actualHrs, hasDelay, hasService, checkedValues, verdict, recPct, recDollar, escalate, driver, serviceCount, delayCount, canceledPct, netServicePct, damageFiled);
     }
 
     function onSlider() {
@@ -1014,9 +1205,9 @@
       recalc();
     }
 
-    function buildSummary(branch, moveTotal, estOriginal, estOnSite, actualHrs, hasDelay, hasService, checkedValues, verdict, recPct, recDollar, escalate, driver, serviceCount, delayCount, canceledCount, netServicePct) {
+    function buildSummary(branch, moveTotal, estOriginalDollars, estOriginalMovers, estOriginalHours, estOnSiteDollars, estOnSiteMovers, estOnSiteHours, actualMovers, actualHrs, hasDelay, hasService, checkedValues, verdict, recPct, recDollar, escalate, driver, serviceCount, delayCount, canceledPct, netServicePct, damageFiled) {
       const delayOtherText = document.getElementById('delayOtherText').value.trim();
-      const serviceOtherText = document.getElementById('serviceOtherText').value.trim();
+      const damageNotesText = document.getElementById('damageNotesText').value.trim();
       const offerPct = parseFloat(document.getElementById('offerSlider').value) || 0;
       const offerDollar = moveTotal * (offerPct / 100);
       const offerEscalate = offerPct > 15;
@@ -1024,18 +1215,20 @@
       const delayNotes = document.getElementById('delayCard').querySelectorAll('input[type="checkbox"]:checked');
 
       const delayLabels = Array.from(delayNotes).map(cb => cb.closest('label').textContent.trim());
-      const valueLabels = checkedValues.map(v => v.name);
+      const valueLabels = checkedValues.map(v => v.name + (v.note ? ' [' + v.note + ']' : ''));
 
       let lines = [];
       lines.push('DISCOUNT CASE SUMMARY');
       lines.push('Branch: ' + (branch || 'Not selected'));
-      lines.push('Move total: ' + fmtDollar(moveTotal));
-      lines.push('Original estimate: ' + (estOriginal || 0).toFixed(1) + ' hrs | On-site estimate: ' + (estOnSite || 0).toFixed(1) + ' hrs | Actual: ' + (actualHrs || 0).toFixed(1) + ' hrs');
+      lines.push('Original estimate: ' + fmtDollar(estOriginalDollars) + ' | ' + (estOriginalMovers || 0) + ' movers | ' + (estOriginalHours || 0).toFixed(1) + ' hrs');
+      lines.push('On-site estimate: ' + fmtDollar(estOnSiteDollars) + ' | ' + (estOnSiteMovers || 0) + ' movers | ' + (estOnSiteHours || 0).toFixed(1) + ' hrs');
+      lines.push('Actual: ' + (actualMovers || 0) + ' movers | ' + (actualHrs || 0).toFixed(1) + ' hrs');
+      lines.push('Total move charges: ' + fmtDollar(moveTotal));
       lines.push('');
       lines.push('Delay factors: ' + (delayLabels.length ? delayLabels.join('; ') : 'None noted') + (delayOtherText ? ' — ' + delayOtherText : ''));
-      lines.push('CHOICES values implicated: ' + (valueLabels.length ? valueLabels.join('; ') : 'None noted') + (serviceOtherText ? ' — ' + serviceOtherText : ''));
+      lines.push('CHOICES values implicated: ' + (valueLabels.length ? valueLabels.join('; ') : 'None noted'));
       if (hasService) {
-        lines.push('Values-based math: ' + serviceCount + ' issue(s) x 5% - ' + canceledCount + ' canceled by legit factor(s) = ' + fmtPct(netServicePct) + (driver === 'values' ? ' (this drove the recommendation)' : ' (time math was higher, drove the recommendation instead)'));
+        lines.push('Values-based math: ' + serviceCount + ' issue(s) x 5% - ' + delayCount + ' legit factor(s) x 2.5% (2-to-1) = ' + fmtPct(canceledPct) + ' canceled -> net ' + fmtPct(netServicePct) + (driver === 'values' ? ' (this drove the recommendation)' : ' (time math was higher, drove the recommendation instead)'));
       }
       lines.push('');
       lines.push('Verdict: ' + verdict);
@@ -1050,6 +1243,11 @@
       if (valueLabels.length) {
         lines.push('');
         lines.push('Coaching follow-up (separate from customer resolution): address ' + valueLabels.join(', ') + ' with the crew.');
+      }
+      lines.push('');
+      lines.push('Damage claim already filed: ' + (damageFiled ? 'YES' : 'No') + (damageFiled && damageNotesText ? ' — ' + damageNotesText : ''));
+      if (damageFiled) {
+        lines.push('COORDINATE WITH CLAIMS — this discount excludes any separate claims payout. Decide the total resolution together before finalizing with the customer.');
       }
 
       document.getElementById('summaryText').value = lines.join('\n');
