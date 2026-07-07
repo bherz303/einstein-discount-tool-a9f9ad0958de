@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Internal Tool</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --orange: #EF8B22;
+      --blue: #0979C3;
+      --dark: #27343D;
+      --gray: #53575A;
+      --light: #F6F6F6;
+      --green: #22C55E;
+      --red: #DC2626;
+      --yellow: #F59E0B;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--light);
+      color: var(--gray);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: var(--dark);
+      padding: 28px 40px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header img {
+      height: 40px;
+      filter: brightness(0) invert(1);
+    }
+
+    .header-divider {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .header-title h1 {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.3px;
+    }
+
+    .header-title p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      margin-top: 2px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-badge {
+      background: var(--orange);
+      color: white;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .header-link {
+      color: rgba(255,255,255,0.7);
+      font-size: 12px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 6px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .header-link:hover {
+      color: white;
+      border-color: rgba(255,255,255,0.5);
+    }
+
+    /* ── LAYOUT ── */
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 24px 48px;
+    }
+
+    /* ── ESCALATION BANNER ── */
+    .escalation-banner {
+      background: #FEE2E2;
+      border: 1px solid #FCA5A5;
+      border-left: 5px solid var(--red);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      color: #7f1d1d;
+      line-height: 1.5;
+    }
+
+    .escalation-banner .esc-icon { font-size: 20px; flex-shrink: 0; }
+    .escalation-banner strong { color: #b91c1c; }
+
+    /* ── TOOL GRID ── */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+      padding: 20px 22px;
+    }
+
+    .card + .card { margin-top: 16px; }
+
+    .card h2 {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .card .card-sub {
+      font-size: 12px;
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+
+    .field-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .field-row label {
+      font-size: 12.5px;
+      color: var(--gray);
+      width: 180px;
+      flex-shrink: 0;
+    }
+
+    .field-row input[type="number"] {
+      flex: 1;
+      padding: 9px 11px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Roboto', sans-serif;
+      color: var(--dark);
+    }
+
+    .field-row input[type="number"]:focus {
+      outline: none;
+      border-color: var(--blue);
+    }
+
+    .field-hint {
+      font-size: 11px;
+      color: var(--gray);
+      margin: -6px 0 14px 192px;
+      font-style: italic;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 8px;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin-top: 1px;
+      flex-shrink: 0;
+      accent-color: var(--blue);
+    }
+
+    .checkbox-row.service input[type="checkbox"] {
+      accent-color: var(--red);
+    }
+
+    .text-input-row {
+      margin-top: 8px;
+    }
+
+    .text-input-row input[type="text"] {
+      width: 100%;
+      padding: 8px 11px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: 'Roboto', sans-serif;
+      color: var(--dark);
+    }
+
+    .text-input-row input[type="text"]:focus {
+      outline: none;
+      border-color: var(--blue);
+    }
+
+    /* ── RECOMMENDATION PANEL ── */
+    .sticky-panel {
+      position: sticky;
+      top: 20px;
+    }
+
+    .verdict-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+
+    .verdict-badge.green { background: #DCFCE7; color: #15803d; }
+    .verdict-badge.yellow { background: #FEF9C3; color: #854d0e; }
+    .verdict-badge.orange { background: #FFEDD5; color: #c2410c; }
+    .verdict-badge.red { background: #FEE2E2; color: #b91c1c; }
+
+    .verdict-explain {
+      font-size: 13px;
+      color: var(--gray);
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .stat-box {
+      background: var(--light);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
+    .stat-box .stat-label {
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--gray);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .stat-box .stat-value {
+      font-size: 17px;
+      font-weight: 900;
+      color: var(--dark);
+    }
+
+    .stat-box.pos .stat-value { color: var(--red); }
+    .stat-box.neg .stat-value { color: var(--green); }
+
+    .recommend-box {
+      background: var(--dark);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+    }
+
+    .recommend-box .rec-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 6px;
+    }
+
+    .recommend-box .rec-value {
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--orange);
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .recommend-box .rec-value .rec-dollar {
+      font-size: 18px;
+      color: white;
+      font-weight: 700;
+    }
+
+    .recommend-box .rec-note {
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+    .escalate-flag {
+      display: none;
+      background: #FEE2E2;
+      border: 1px solid #FCA5A5;
+      border-left: 4px solid var(--red);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 12.5px;
+      color: #b91c1c;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .escalate-flag.show { display: block; }
+
+    /* ── SLIDER ── */
+    .slider-block {
+      margin-bottom: 18px;
+    }
+
+    .slider-block .slider-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12.5px;
+      color: var(--gray);
+      margin-bottom: 8px;
+    }
+
+    .slider-block .slider-label strong {
+      color: var(--dark);
+      font-size: 14px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--blue);
+    }
+
+    .slider-ticks {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    /* ── SCRIPT BOX ── */
+    .script-box {
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+    }
+
+    .script-box .script-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--blue);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .script-box p {
+      font-size: 13px;
+      color: var(--dark);
+      line-height: 1.5;
+    }
+
+    /* ── SUMMARY ── */
+    .summary-box textarea {
+      width: 100%;
+      min-height: 160px;
+      padding: 12px 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-family: 'Roboto', sans-serif;
+      color: var(--dark);
+      resize: vertical;
+      background: var(--light);
+    }
+
+    .btn-copy {
+      margin-top: 10px;
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      font-family: 'Roboto', sans-serif;
+      transition: transform 120ms ease, box-shadow 120ms ease;
+    }
+
+    .btn-copy:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(9, 121, 195, 0.3);
+    }
+
+    .btn-copy:active { transform: scale(0.98); }
+
+    .btn-copy.copied { background: var(--green); }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--white);
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .footer-left { font-size: 13px; color: var(--gray); }
+    .footer-left strong { color: var(--dark); }
+    .footer-right { font-size: 12px; color: var(--gray); text-align: right; }
+
+    @media (max-width: 900px) {
+      .tool-grid { grid-template-columns: 1fr; }
+      .sticky-panel { position: static; }
+      .field-row { flex-direction: column; align-items: flex-start; }
+      .field-row label { width: auto; }
+      .field-hint { margin-left: 0; }
+      .header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <img src="https://www.einsteinmoving.com/wp-content/uploads/2022/02/Einstein-Logo.svg" alt="Einstein Moving" />
+      <div class="header-divider"></div>
+      <div class="header-title">
+        <h1>Discount Decision Tool</h1>
+        <p>Enter the case facts. Get the recommended discount, the reasoning, and the words to use.</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <a class="header-link" href="playbook.html">← Playbook Reference</a>
+      <div class="header-badge">CTXH Manager Tool</div>
+    </div>
+  </div>
+
+  <div class="page">
+
+    <!-- ESCALATION RULE -->
+    <div class="escalation-banner">
+      <span class="esc-icon">⚠️</span>
+      <span><strong>Hard rule:</strong> Any discount over 15% of the move total cannot be offered on your own authority. It must be reviewed and discussed with your Regional Manager and/or the Claims department head <strong>before</strong> it goes to the customer. This tool will flag it if you get there.</span>
+    </div>
+
+    <div class="tool-grid">
+
+      <!-- LEFT: CASE INTAKE -->
+      <div class="intake-col">
+
+        <div class="card">
+          <h2>1. Time &amp; Pricing</h2>
+          <div class="card-sub">Pull these straight from the contract and the job in EMMA.</div>
+
+          <div class="field-row">
+            <label for="moveTotal">Move total charged ($)</label>
+            <input type="number" id="moveTotal" placeholder="e.g. 1200" oninput="recalc()" />
+          </div>
+
+          <div class="field-row">
+            <label for="estOriginal">Original estimate (hrs)</label>
+            <input type="number" id="estOriginal" step="0.5" placeholder="e.g. 6.0" oninput="recalc()" />
+          </div>
+
+          <div class="field-row">
+            <label for="estOnSite">On-site estimate (hrs)</label>
+            <input type="number" id="estOnSite" step="0.5" placeholder="e.g. 5.5" oninput="recalc()" />
+          </div>
+
+          <div class="field-row">
+            <label for="actualHrs">Actual time (hrs)</label>
+            <input type="number" id="actualHrs" step="0.5" placeholder="e.g. 5.0" oninput="recalc()" />
+          </div>
+          <div class="field-hint">The on-site estimate is what the crew is actually held to — that's the comparison that matters.</div>
+        </div>
+
+        <div class="card">
+          <h2>2. Legitimate Delay Factors</h2>
+          <div class="card-sub">Things that justify extra time — not the crew's fault.</div>
+
+          <div class="checkbox-group">
+            <label class="checkbox-row"><input type="checkbox" onchange="recalc()" /> Furniture disassembly/reassembly (beds, cribs, exercise equipment)</label>
+            <label class="checkbox-row"><input type="checkbox" onchange="recalc()" /> Appliance modification (fridge doors, disconnect/reconnect)</label>
+            <label class="checkbox-row"><input type="checkbox" onchange="recalc()" /> Tight access (stairs, elevators, long carry, doorways)</label>
+            <label class="checkbox-row"><input type="checkbox" onchange="recalc()" /> Additional items not on original inventory</label>
+            <label class="checkbox-row"><input type="checkbox" onchange="recalc()" /> Weather or road delay</label>
+            <label class="checkbox-row"><input type="checkbox" id="delayOtherCheck" onchange="recalc()" /> Other legitimate factor</label>
+          </div>
+          <div class="text-input-row">
+            <input type="text" id="delayOtherText" placeholder="Describe the other factor..." oninput="recalc()" />
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>3. Service Issues</h2>
+          <div class="card-sub">Actual mistakes — separate from time math. Check any that apply.</div>
+
+          <div class="checkbox-group">
+            <label class="checkbox-row service"><input type="checkbox" onchange="recalc()" /> Late arrival beyond the window</label>
+            <label class="checkbox-row service"><input type="checkbox" onchange="recalc()" /> Property damage</label>
+            <label class="checkbox-row service"><input type="checkbox" onchange="recalc()" /> Unprofessional crew conduct</label>
+            <label class="checkbox-row service"><input type="checkbox" onchange="recalc()" /> Missed or wrong items</label>
+            <label class="checkbox-row service"><input type="checkbox" id="serviceOtherCheck" onchange="recalc()" /> Other service failure</label>
+          </div>
+          <div class="text-input-row">
+            <input type="text" id="serviceOtherText" placeholder="Describe the other issue..." oninput="recalc()" />
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: RECOMMENDATION -->
+      <div class="sticky-panel">
+
+        <div class="card">
+          <h2>Recommendation</h2>
+          <div class="card-sub">Updates live as you fill in the case.</div>
+
+          <div id="verdictBadge" class="verdict-badge green">Fill in the case facts</div>
+          <div id="verdictExplain" class="verdict-explain">Start with Section 1 — the time and pricing facts drive everything else.</div>
+
+          <div class="stat-grid">
+            <div class="stat-box">
+              <span class="stat-label">Vs. On-Site Estimate</span>
+              <span class="stat-value" id="statVariance">—</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Effective Hourly Rate</span>
+              <span class="stat-value" id="statRate">—</span>
+            </div>
+          </div>
+
+          <div class="recommend-box">
+            <div class="rec-label">Recommended Discount</div>
+            <div class="rec-value">
+              <span id="recPct">0.0%</span>
+              <span class="rec-dollar" id="recDollar">$0.00</span>
+            </div>
+            <div class="rec-note" id="recNote">Enter case facts to generate a recommendation.</div>
+          </div>
+
+          <div class="escalate-flag" id="escalateFlag">⚠️ This exceeds 15% of the move total. Do not offer this yourself — review with your Regional Manager and/or the Claims department head first.</div>
+
+          <div class="slider-block">
+            <div class="slider-label"><span>Adjust the actual offer</span><strong id="sliderVal">0.0%</strong></div>
+            <input type="range" id="offerSlider" min="0" max="25" step="0.5" value="0" oninput="onSlider()" />
+            <div class="slider-ticks"><span>0%</span><span>5%</span><span>10%</span><span>15% (max)</span><span>20%</span><span>25%</span></div>
+          </div>
+
+          <div class="script-box">
+            <div class="script-title">Suggested Script</div>
+            <p id="scriptText">Fill in the case facts above to get suggested language.</p>
+          </div>
+
+        </div>
+
+        <div class="card summary-box">
+          <h2>Case Summary</h2>
+          <div class="card-sub">Paste this into your notes, EMMA, or the Monday pulse.</div>
+          <textarea id="summaryText" readonly></textarea>
+          <button class="btn-copy" id="copyBtn" onclick="copySummary()">Copy Summary</button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-left">
+        <strong>Source:</strong> Trainer notes — customer discount / escalation philosophy, adapted for CTXH branch managers.
+      </div>
+      <div class="footer-right">
+        Einstein Moving Co. &middot; Internal use only
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const fmtDollar = (n) => '$' + (isFinite(n) ? n : 0).toFixed(2);
+    const fmtPct = (n) => (isFinite(n) ? n : 0).toFixed(1) + '%';
+
+    let lastRecommendedPct = 0;
+    let userMovedSlider = false;
+
+    function collectChecks(container) {
+      return Array.from(container.querySelectorAll('input[type="checkbox"]')).some(cb => cb.checked);
+    }
+
+    function recalc() {
+      const cards = document.querySelectorAll('.intake-col .card');
+      const delayCard = cards[1];
+      const serviceCard = cards[2];
+
+      const moveTotal = parseFloat(document.getElementById('moveTotal').value) || 0;
+      const estOriginal = parseFloat(document.getElementById('estOriginal').value) || 0;
+      const estOnSite = parseFloat(document.getElementById('estOnSite').value) || 0;
+      const actualHrs = parseFloat(document.getElementById('actualHrs').value) || 0;
+
+      const hasDelay = collectChecks(delayCard);
+      const hasService = collectChecks(serviceCard);
+
+      const variance = actualHrs && estOnSite ? actualHrs - estOnSite : 0;
+      const rate = actualHrs > 0 ? moveTotal / actualHrs : 0;
+
+      document.getElementById('statVariance').textContent =
+        actualHrs && estOnSite ? (variance > 0 ? '+' : '') + variance.toFixed(1) + ' hrs' : '—';
+      document.getElementById('statVariance').parentElement.classList.remove('pos', 'neg');
+      if (actualHrs && estOnSite) {
+        document.getElementById('statVariance').parentElement.classList.add(variance > 0 ? 'pos' : 'neg');
+      }
+      document.getElementById('statRate').textContent = rate ? fmtDollar(rate) + '/hr' : '—';
+
+      let verdict = 'Fill in the case facts';
+      let verdictClass = 'green';
+      let explain = 'Start with Section 1 — the time and pricing facts drive everything else.';
+      let recPct = 0;
+      let recDollar = 0;
+      let note = 'Enter case facts to generate a recommendation.';
+      let script = 'Fill in the case facts above to get suggested language.';
+
+      if (moveTotal > 0 && actualHrs > 0 && estOnSite > 0) {
+
+        if (hasService) {
+          verdict = 'Service Issue — Not a Time Dispute';
+          verdictClass = 'red';
+          explain = 'This isn\'t primarily a time-and-estimate question — there\'s an actual service failure. Time math still matters for context, but the discount should reflect the severity of the issue, not just the hours.';
+          recPct = 10;
+          recDollar = moveTotal * 0.10;
+          note = 'Starting point only — use judgment on severity. Document the specific failure regardless of the dollar amount.';
+          script = 'I\'m sorry this happened — this isn\'t the standard we hold ourselves to. Let me look into exactly what went wrong and I\'ll follow up tomorrow with how we\'re going to make it right.';
+        } else if (variance <= 0) {
+          verdict = 'Pricing Was Fair';
+          verdictClass = 'green';
+          explain = 'The crew finished at or under the on-site estimate. There\'s no time-based overage to discount. Take the facts back to the customer before offering anything.';
+          recPct = hasDelay ? 5 : 0;
+          recDollar = moveTotal * (recPct / 100);
+          note = hasDelay
+            ? 'Optional goodwill only — use if the customer is still unhappy after hearing the facts. Not required.'
+            : 'No discount is warranted based on the numbers. Explain the facts first — only consider a small goodwill gesture if they still push back.';
+          script = 'Your original estimate was ' + (estOriginal || estOnSite).toFixed(1) + ' hours, the on-site estimate was ' + estOnSite.toFixed(1) + ', and the crew finished in ' + actualHrs.toFixed(1) + ' — under estimate. ' +
+            (hasDelay ? 'That includes some extra work along the way that the crew absorbed without adding time.' : '');
+        } else {
+          const overageHours = variance;
+          const overageDollars = overageHours * rate;
+
+          if (hasDelay) {
+            verdict = 'Overage — Explained by Legitimate Factors';
+            verdictClass = 'yellow';
+            explain = 'The crew went over the on-site estimate, but there\'s a real reason (disassembly, access, extra items, etc.). Explain the facts first — if they still push back, split the difference on the overage rather than discounting the whole move.';
+            recDollar = overageDollars / 2;
+            recPct = moveTotal > 0 ? (recDollar / moveTotal) * 100 : 0;
+            note = 'Split-the-difference tactic: half of the overage (' + fmtDollar(overageDollars) + ' total) is a fair starting offer if they still don\'t want to pay after hearing the facts.';
+            script = 'We did run over the on-site estimate here because of the extra work involved. Instead of you covering all of that extra time, let\'s split it — you\'d pay half of the difference between the estimate and the actual charge.';
+          } else {
+            verdict = 'Overage — Not Fully Explained';
+            verdictClass = 'orange';
+            explain = 'The crew went over the on-site estimate and there\'s no documented reason for it. This leans toward covering the overage rather than a token discount — talk to the crew before finalizing.';
+            recDollar = overageDollars;
+            recPct = moveTotal > 0 ? (recDollar / moveTotal) * 100 : 0;
+            note = 'This equals covering the full overage (' + fmtDollar(overageDollars) + '). Confirm with the crew first — there may be a factor that wasn\'t captured on the intake form.';
+            script = 'I want to run this down with the crew before I give you a final number — I\'ll call you back tomorrow. Based on what I\'m seeing so far, we did run longer than expected without a clear reason, and I want to make that right.';
+          }
+        }
+      }
+
+      document.getElementById('verdictBadge').textContent = verdict;
+      document.getElementById('verdictBadge').className = 'verdict-badge ' + verdictClass;
+      document.getElementById('verdictExplain').textContent = explain;
+      document.getElementById('recNote').textContent = note;
+      document.getElementById('scriptText').textContent = script;
+
+      lastRecommendedPct = recPct;
+      document.getElementById('recPct').textContent = fmtPct(recPct);
+      document.getElementById('recDollar').textContent = fmtDollar(recDollar);
+
+      const escalate = recPct > 15;
+      document.getElementById('escalateFlag').classList.toggle('show', escalate);
+
+      if (!userMovedSlider) {
+        document.getElementById('offerSlider').value = Math.min(Math.round(recPct * 2) / 2, 25);
+        updateSliderDisplay(moveTotal);
+      } else {
+        updateSliderDisplay(moveTotal);
+      }
+
+      buildSummary(moveTotal, estOriginal, estOnSite, actualHrs, hasDelay, hasService, verdict, recPct, recDollar, escalate);
+    }
+
+    function onSlider() {
+      userMovedSlider = true;
+      const moveTotal = parseFloat(document.getElementById('moveTotal').value) || 0;
+      updateSliderDisplay(moveTotal);
+      recalcSummaryOnly();
+    }
+
+    function updateSliderDisplay(moveTotal) {
+      const pct = parseFloat(document.getElementById('offerSlider').value) || 0;
+      document.getElementById('sliderVal').textContent = fmtPct(pct) + ' = ' + fmtDollar(moveTotal * (pct / 100));
+      const slider = document.getElementById('offerSlider');
+      if (pct > 15) {
+        slider.style.accentColor = 'var(--red)';
+      } else {
+        slider.style.accentColor = '';
+      }
+    }
+
+    function recalcSummaryOnly() {
+      // re-run full recalc so summary text reflects slider-adjusted offer too
+      recalc();
+    }
+
+    function buildSummary(moveTotal, estOriginal, estOnSite, actualHrs, hasDelay, hasService, verdict, recPct, recDollar, escalate) {
+      const delayOtherText = document.getElementById('delayOtherText').value.trim();
+      const serviceOtherText = document.getElementById('serviceOtherText').value.trim();
+      const offerPct = parseFloat(document.getElementById('offerSlider').value) || 0;
+      const offerDollar = moveTotal * (offerPct / 100);
+      const offerEscalate = offerPct > 15;
+
+      const delayNotes = Array.from(document.querySelectorAll('.intake-col .card'))[1]
+        .querySelectorAll('input[type="checkbox"]:checked');
+      const serviceNotes = Array.from(document.querySelectorAll('.intake-col .card'))[2]
+        .querySelectorAll('input[type="checkbox"]:checked');
+
+      const delayLabels = Array.from(delayNotes).map(cb => cb.closest('label').textContent.trim());
+      const serviceLabels = Array.from(serviceNotes).map(cb => cb.closest('label').textContent.trim());
+
+      let lines = [];
+      lines.push('DISCOUNT CASE SUMMARY');
+      lines.push('Move total: ' + fmtDollar(moveTotal));
+      lines.push('Original estimate: ' + (estOriginal || 0).toFixed(1) + ' hrs | On-site estimate: ' + (estOnSite || 0).toFixed(1) + ' hrs | Actual: ' + (actualHrs || 0).toFixed(1) + ' hrs');
+      lines.push('');
+      lines.push('Delay factors: ' + (delayLabels.length ? delayLabels.join('; ') : 'None noted') + (delayOtherText ? ' — ' + delayOtherText : ''));
+      lines.push('Service issues: ' + (serviceLabels.length ? serviceLabels.join('; ') : 'None noted') + (serviceOtherText ? ' — ' + serviceOtherText : ''));
+      lines.push('');
+      lines.push('Verdict: ' + verdict);
+      lines.push('System recommendation: ' + fmtPct(recPct) + ' (' + fmtDollar(recDollar) + ')');
+      lines.push('Offer selected: ' + fmtPct(offerPct) + ' (' + fmtDollar(offerDollar) + ')');
+      if (offerEscalate) {
+        lines.push('ESCALATION REQUIRED — offer exceeds 15% of move total. Reviewed with RM/Claims: ___________');
+      }
+
+      document.getElementById('summaryText').value = lines.join('\n');
+    }
+
+    function copySummary() {
+      const box = document.getElementById('summaryText');
+      const btn = document.getElementById('copyBtn');
+      box.select();
+      let copied = false;
+      try {
+        navigator.clipboard.writeText(box.value);
+        copied = true;
+      } catch (e) {
+        try {
+          document.execCommand('copy');
+          copied = true;
+        } catch (e2) {
+          copied = false;
+        }
+      }
+      if (copied) {
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy Summary';
+          btn.classList.remove('copied');
+        }, 1800);
+      }
+    }
+
+    // initial render
+    recalc();
+  </script>
+
+</body>
+</html>

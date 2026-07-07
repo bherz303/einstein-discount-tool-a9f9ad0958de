@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Internal Tool</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --orange: #EF8B22;
+      --blue: #0979C3;
+      --dark: #27343D;
+      --gray: #53575A;
+      --light: #F6F6F6;
+      --green: #22C55E;
+      --red: #DC2626;
+      --yellow: #F59E0B;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--light);
+      color: var(--gray);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: var(--dark);
+      padding: 28px 40px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header img {
+      height: 40px;
+      filter: brightness(0) invert(1);
+    }
+
+    .header-divider {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .header-title h1 {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.3px;
+    }
+
+    .header-title p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      margin-top: 2px;
+    }
+
+    .header-badge {
+      background: var(--orange);
+      color: white;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-link {
+      color: rgba(255,255,255,0.7);
+      font-size: 12px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 6px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .header-link:hover {
+      color: white;
+      border-color: rgba(255,255,255,0.5);
+    }
+
+    /* ── LAYOUT ── */
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 24px 48px;
+    }
+
+    /* ── ESCALATION BANNER ── */
+    .escalation-banner {
+      background: #FEE2E2;
+      border: 1px solid #FCA5A5;
+      border-left: 5px solid var(--red);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      color: #7f1d1d;
+      line-height: 1.5;
+    }
+
+    .escalation-banner .esc-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .escalation-banner strong {
+      color: #b91c1c;
+    }
+
+    /* ── OVERVIEW CARDS ── */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .overview-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 18px 20px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .overview-card h3 {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+
+    .score-tiers {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .tier {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .tier-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .tier-dot.green { background: var(--green); }
+    .tier-dot.yellow { background: var(--yellow); }
+    .tier-dot.orange { background: var(--orange); }
+    .tier-dot.red { background: var(--red); }
+
+    .tier-pts {
+      font-weight: 700;
+      width: 46px;
+      flex-shrink: 0;
+    }
+
+    .check-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .check-num {
+      width: 20px;
+      height: 20px;
+      background: var(--blue);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .flow-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .flow-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+    }
+
+    .flow-num {
+      width: 18px;
+      height: 18px;
+      background: var(--orange);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .section-header h2 {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--dark);
+    }
+
+    .section-pill {
+      background: var(--orange);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .section-pill.blue {
+      background: var(--blue);
+    }
+
+    /* ── STEP CARDS (Genius Response) ── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .step-card {
+      background: var(--white);
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      overflow: hidden;
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 16px 10px;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .step-num {
+      width: 24px;
+      height: 24px;
+      background: var(--orange);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-name {
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--dark);
+    }
+
+    .step-body {
+      padding: 10px 16px 14px;
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+
+    .step-body .note {
+      display: block;
+      margin-top: 6px;
+      font-size: 11.5px;
+      color: var(--blue);
+      font-style: italic;
+    }
+
+    /* ── CALCULATOR ── */
+    .calc-card {
+      background: var(--white);
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+      padding: 22px 24px;
+      margin-bottom: 28px;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .calc-block h4 {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .calc-input-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .calc-input-row label {
+      font-size: 12.5px;
+      color: var(--gray);
+      width: 130px;
+      flex-shrink: 0;
+    }
+
+    .calc-input-row input {
+      flex: 1;
+      padding: 8px 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Roboto', sans-serif;
+      color: var(--dark);
+    }
+
+    .calc-input-row input:focus {
+      outline: none;
+      border-color: var(--blue);
+    }
+
+    .calc-output {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .calc-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      background: var(--light);
+    }
+
+    .calc-row.warn {
+      background: #FEE2E2;
+      color: #b91c1c;
+      font-weight: 700;
+    }
+
+    .calc-row strong {
+      color: var(--dark);
+    }
+
+    .calc-note {
+      font-size: 11.5px;
+      color: var(--gray);
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* ── WORKED EXAMPLE ── */
+    .example-card {
+      background: var(--white);
+      border: 2px solid var(--blue);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .example-header {
+      background: var(--blue);
+      color: white;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .example-header h3 {
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .example-header span {
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.2);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .example-body {
+      padding: 18px 20px;
+    }
+
+    .example-facts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .fact-box {
+      background: var(--light);
+      border-radius: 10px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .fact-box .fact-label {
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--gray);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .fact-box .fact-value {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--dark);
+    }
+
+    .fact-box.under .fact-value { color: var(--green); }
+
+    .example-walk {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .walk-row {
+      display: flex;
+      gap: 10px;
+      font-size: 13px;
+      align-items: flex-start;
+    }
+
+    .walk-tag {
+      font-weight: 700;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 1px;
+      background: #DBEAFE;
+      color: var(--blue);
+    }
+
+    .example-conclusion {
+      background: #ECFDF5;
+      border: 1px solid #A7F3D0;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: #065f46;
+    }
+
+    .example-conclusion strong {
+      color: #047857;
+    }
+
+    /* ── SCRIPTS (dark box) ── */
+    .scripts {
+      background: var(--dark);
+      border-radius: 14px;
+      padding: 22px 24px;
+      margin-bottom: 28px;
+    }
+
+    .scripts h2 {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .scripts h2 span {
+      color: var(--orange);
+    }
+
+    .scripts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    .script-item {
+      background: rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .script-num {
+      width: 26px;
+      height: 26px;
+      background: var(--orange);
+      color: white;
+      font-size: 13px;
+      font-weight: 900;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .script-text {
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.4;
+    }
+
+    .script-text strong {
+      color: white;
+      display: block;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .script-text em {
+      display: block;
+      margin-top: 4px;
+      color: rgba(255,255,255,0.6);
+      font-style: italic;
+      font-size: 11.5px;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--white);
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .footer-left {
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    .footer-left strong {
+      color: var(--dark);
+    }
+
+    .footer-right {
+      font-size: 12px;
+      color: var(--gray);
+      text-align: right;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      body { background: white; font-size: 11px; }
+      .page { padding: 12px 16px; }
+      .header { padding: 16px 20px; }
+      .overview-grid { gap: 8px; margin-bottom: 16px; }
+      .steps-grid { gap: 8px; margin-bottom: 16px; }
+      .calc-card { padding: 16px 18px; margin-bottom: 16px; }
+      .example-card { margin-bottom: 16px; }
+      .scripts { padding: 16px 18px; margin-bottom: 16px; }
+      .scripts-grid { gap: 7px; }
+    }
+
+    @media (max-width: 768px) {
+      .overview-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .calc-grid { grid-template-columns: 1fr; }
+      .example-facts { grid-template-columns: 1fr 1fr; }
+      .scripts-grid { grid-template-columns: 1fr; }
+      .header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <img src="https://www.einsteinmoving.com/wp-content/uploads/2022/02/Einstein-Logo.svg" alt="Einstein Moving" />
+      <div class="header-divider"></div>
+      <div class="header-title">
+        <h1>Discount &amp; Escalation Playbook</h1>
+        <p>What to do when a customer says the move took too long — investigate first, then find fair ground.</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <a class="header-link" href="index.html">Open Decision Tool →</a>
+      <div class="header-badge">CTXH Manager Reference</div>
+    </div>
+  </div>
+
+  <div class="page">
+
+    <!-- ESCALATION RULE -->
+    <div class="escalation-banner">
+      <span class="esc-icon">⚠️</span>
+      <span><strong>Hard rule:</strong> Any discount over 15% cannot be offered on your own authority. It must be reviewed and discussed with your Regional Manager and/or the Claims department head <strong>before</strong> it goes to the customer.</span>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="overview-grid">
+
+      <div class="overview-card">
+        <h3>The 15% Line</h3>
+        <div class="score-tiers">
+          <div class="tier">
+            <div class="tier-dot green"></div>
+            <span class="tier-pts" style="color:var(--green)">5%</span>
+            <span><strong>Easy give.</strong> Costs us almost nothing, buys a lot of goodwill.</span>
+          </div>
+          <div class="tier">
+            <div class="tier-dot yellow"></div>
+            <span class="tier-pts" style="color:var(--yellow)">10%</span>
+            <span><strong>Standard compromise.</strong> Use when the complaint has some merit.</span>
+          </div>
+          <div class="tier">
+            <div class="tier-dot orange"></div>
+            <span class="tier-pts" style="color:var(--orange)">15%</span>
+            <span><strong>The ceiling.</strong> Extreme measures only — splitting the difference tactic.</span>
+          </div>
+          <div class="tier" style="margin-top:4px; padding-top:8px; border-top:1px solid #f3f4f6;">
+            <div class="tier-dot red"></div>
+            <span class="tier-pts" style="color:var(--red)">16%+</span>
+            <span><strong>We're losing money</strong> on this move — and it's no longer your call. Escalate to your RM and/or Claims dept head before offering anything.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="overview-card">
+        <h3>Before You Offer Anything</h3>
+        <div class="check-list">
+          <div class="check-row">
+            <div class="check-num">1</div>
+            <span>Pull the contract — original estimate vs. on-site estimate.</span>
+          </div>
+          <div class="check-row">
+            <div class="check-num">2</div>
+            <span>Look up the customer and job in the system.</span>
+          </div>
+          <div class="check-row">
+            <div class="check-num">3</div>
+            <span>Check who was on the crew and talk to them.</span>
+          </div>
+          <div class="check-row">
+            <div class="check-num">4</div>
+            <span>Compare actual move time against both estimates.</span>
+          </div>
+          <div class="check-row">
+            <div class="check-num">5</div>
+            <span>Identify any unexpected delay situations (disassembly, doorways, etc.).</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="overview-card">
+        <h3>Order of Operations</h3>
+        <div class="flow-list">
+          <div class="flow-row"><div class="flow-num">1</div><span>Listen — get the full story</span></div>
+          <div class="flow-row"><div class="flow-num">2</div><span>Investigate — get all the facts</span></div>
+          <div class="flow-row"><div class="flow-num">3</div><span>Apologize — every time, no matter what</span></div>
+          <div class="flow-row"><div class="flow-num">4</div><span>Set expectation — follow up tomorrow</span></div>
+          <div class="flow-row"><div class="flow-num">5</div><span>If pricing was fair — explain, don't just discount</span></div>
+          <div class="flow-row"><div class="flow-num">6</div><span>If they push back — compromise in %</span></div>
+          <div class="flow-row"><div class="flow-num">7</div><span>Extreme case — split the difference</span></div>
+          <div class="flow-row"><div class="flow-num">8</div><span>Above 15% — escalate to RM / Claims</span></div>
+          <div class="flow-row"><div class="flow-num">9</div><span>Last resort — charge it to the game</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- GENIUS RESPONSE STEPS -->
+    <div class="section-header">
+      <h2>The Genius Response — 9 Steps</h2>
+      <span class="section-pill">Run every discount conversation through this</span>
+    </div>
+
+    <div class="steps-grid">
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-num">1</div>
+          <div class="step-name">Listen to everything first</div>
+        </div>
+        <div class="step-body">
+          Let the customer say everything they need to say before you respond with facts or a fix. Don't interrupt with an explanation — that reads as defensive, not helpful.
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-num">2</div>
+          <div class="step-name">Investigate everything</div>
+        </div>
+        <div class="step-body">
+          Pull the contract. Look up the customer and the job in the system. See who was on the crew. Compare the original estimate, the on-site estimate, and the actual move time. Find out if there was an unexpected delay — disassembly, tight doorways, stairs, anything the crew had to work around.
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-num">3</div>
+          <div class="step-name">Apologize — no matter what</div>
+        </div>
+        <div class="step-body">
+          Apologize for the frustration regardless of whose "fault" it turns out to be. The customer had a bad experience; that's worth acknowledging before anything else.
+          <span class="note">This isn't admitting we did something wrong — it's acknowledging how they feel.</span>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-num">4</div>
+          <div class="step-name">Set the follow-up expectation</div>
+        </div>
+        <div class="step-body">
+          Tell the customer you'll talk to your crew and follow up the next day once you've heard their side. This buys time to actually investigate instead of negotiating blind on the phone.
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-num">5</div>
+          <div class="step-name">If pricing was fair, say so — with facts</div>
+        </div>
+        <div class="step-body">
+          If the investigation shows the pricing and time were fair, take that information back to the customer and walk them through it. Explain everything — the estimates, the actual time, the delay causes. Don't lead with a discount just to make the call end.
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-num">6</div>
+          <div class="step-name">If they still push back, compromise in %</div>
+        </div>
+        <div class="step-body">
+          If the customer still doesn't want to pay after hearing the facts, offer a discount framed as a percentage of the move cost, then translate it to a dollar amount. <em>"We can do 10% off, which comes to $X."</em>
+          <span class="note">Percentage framing keeps it proportional and easy to explain — dollar-only framing invites bigger asks.</span>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-num">7</div>
+          <div class="step-name">Extreme measure — split the difference</div>
+        </div>
+        <div class="step-body">
+          If we went over our own quote, a good tactic in extreme situations is splitting the difference between the quoted amount and the actual charge with the customer. This is reserved for real overage situations, not general complaints.
+        </div>
+      </div>
+
+      <div class="step-card" style="border-color:var(--red)">
+        <div class="step-header" style="border-bottom-color:#FEE2E2">
+          <div class="step-num" style="background:var(--red)">8</div>
+          <div class="step-name">Above 15% — stop and escalate</div>
+        </div>
+        <div class="step-body">
+          If getting to a fair resolution means going past 15% — even with the split-the-difference tactic — do not offer it yourself. Pause the conversation and review it with your Regional Manager and/or the Claims department head first. This is a hard rule, not a judgment call.
+          <span class="note">Set the same next-day follow-up expectation with the customer while you get sign-off.</span>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-num">9</div>
+          <div class="step-name">Last resort — charge it to the game</div>
+        </div>
+        <div class="step-body">
+          If all the steps above fail — and the resolution is inside the 15% line, or has been approved by RM/Claims — take what you can get and move on. One difficult resolution isn't worth burning hours chasing the last dollar.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CALCULATOR -->
+    <div class="section-header">
+      <h2>Discount Calculator</h2>
+      <span class="section-pill blue">Do the math before you're on the phone</span>
+    </div>
+
+    <div class="calc-card">
+      <div class="calc-grid">
+
+        <div class="calc-block">
+          <h4>% Off Move Total</h4>
+          <div class="calc-input-row">
+            <label for="moveTotal">Move total ($)</label>
+            <input type="number" id="moveTotal" placeholder="e.g. 1200" oninput="calcPercent()" />
+          </div>
+          <div class="calc-output" id="percentOutput">
+            <div class="calc-row"><span>5%</span><strong>$0.00</strong></div>
+            <div class="calc-row"><span>10%</span><strong>$0.00</strong></div>
+            <div class="calc-row"><span>15% (max on your own authority)</span><strong>$0.00</strong></div>
+            <div class="calc-row warn">16%+ &mdash; requires RM / Claims sign-off before offering</div>
+          </div>
+          <div class="calc-note">Frame the offer as the %, then say the dollar amount out loud. Anything at or above 16% is not yours to approve solo.</div>
+        </div>
+
+        <div class="calc-block">
+          <h4>Split the Difference (overage only)</h4>
+          <div class="calc-input-row">
+            <label for="quotedTotal">Quoted amount ($)</label>
+            <input type="number" id="quotedTotal" placeholder="e.g. 1200" oninput="calcSplit()" />
+          </div>
+          <div class="calc-input-row">
+            <label for="actualTotal">Actual charge ($)</label>
+            <input type="number" id="actualTotal" placeholder="e.g. 1400" oninput="calcSplit()" />
+          </div>
+          <div class="calc-output" id="splitOutput">
+            <div class="calc-row"><span>Overage</span><strong>$0.00</strong></div>
+            <div class="calc-row"><span>Split (50/50)</span><strong>$0.00</strong></div>
+            <div class="calc-row"><span>Customer pays</span><strong>$0.00</strong></div>
+            <div class="calc-row"><span>Discount as % of quote</span><strong id="splitPct">0.0%</strong></div>
+            <div class="calc-row warn" id="splitWarn" style="display:none">Over 15% of the quote &mdash; get RM / Claims sign-off before offering this</div>
+          </div>
+          <div class="calc-note">Only use this when we genuinely went over our own quote — not for general complaints.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- WORKED EXAMPLE -->
+    <div class="example-card">
+      <div class="example-header">
+        <h3>Worked Example — "The Movers Took Too Long"</h3>
+        <span>Trainer Scenario</span>
+      </div>
+      <div class="example-body">
+
+        <div class="example-facts">
+          <div class="fact-box">
+            <span class="fact-label">Original Estimate</span>
+            <span class="fact-value">6.0 hrs</span>
+          </div>
+          <div class="fact-box">
+            <span class="fact-label">On-Site Estimate</span>
+            <span class="fact-value">5.5 hrs</span>
+          </div>
+          <div class="fact-box under">
+            <span class="fact-label">Actual Time</span>
+            <span class="fact-value">5.0 hrs</span>
+          </div>
+          <div class="fact-box under">
+            <span class="fact-label">Vs. On-Site Est.</span>
+            <span class="fact-value">-0.5 hrs</span>
+          </div>
+        </div>
+
+        <div class="example-walk">
+          <div class="walk-row"><span class="walk-tag">Listen</span><span>Customer says the move flat-out took too long and wants something done about it.</span></div>
+          <div class="walk-row"><span class="walk-tag">Investigate</span><span>Contract shows the crew actually finished in 5 hours — under both the original (6.0) and on-site (5.5) estimates.</span></div>
+          <div class="walk-row"><span class="walk-tag">Investigate</span><span>Crew had to remove both refrigerator doors to get it through the new place's doorway, and fully disassemble an IKEA platform bed with multiple screws and parts — both legitimate, unplanned time costs.</span></div>
+          <div class="walk-row"><span class="walk-tag">Apologize</span><span>Still apologize for the frustration and how long the day felt, even though the numbers are in our favor.</span></div>
+          <div class="walk-row"><span class="walk-tag">Follow up</span><span>Tell the customer you're talking to the crew and will call back tomorrow with the full picture.</span></div>
+        </div>
+
+        <div class="example-conclusion">
+          <strong>Conclusion:</strong> Pricing was fair — the crew beat both estimates despite extra disassembly work. This isn't a "give a discount to make it go away" situation. Take the facts back to the customer: original estimate, on-site estimate, actual time, and exactly what caused the extra labor (fridge doors, bed disassembly). If they still push back after hearing it straight, a small goodwill gesture (5%) is reasonable — but nothing more, because the math already favors us.
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <div class="scripts">
+      <h2>Quick Scripts — <span>What To Actually Say</span></h2>
+      <div class="scripts-grid">
+
+        <div class="script-item">
+          <div class="script-num">1</div>
+          <div class="script-text">
+            <strong>The Apology Opener</strong>
+            I'm really sorry the move took longer than you expected — that's frustrating no matter what caused it. Let me pull everything up and figure out exactly what happened.
+          </div>
+        </div>
+
+        <div class="script-item">
+          <div class="script-num">2</div>
+          <div class="script-text">
+            <strong>Setting the Follow-Up</strong>
+            I want to talk to the crew directly before I give you an answer I can stand behind. I'll call you back tomorrow with the full picture — I promise you won't be waiting on this.
+          </div>
+        </div>
+
+        <div class="script-item">
+          <div class="script-num">3</div>
+          <div class="script-text">
+            <strong>Explaining the Facts</strong>
+            Your original estimate was 6 hours, the on-site walkthrough brought it to 5.5, and the crew actually finished in 5 — under both. The extra effort was pulling both fridge doors and disassembling the bed, which the crew handled without adding time.
+          </div>
+        </div>
+
+        <div class="script-item">
+          <div class="script-num">4</div>
+          <div class="script-text">
+            <strong>Framing a % Discount</strong>
+            I hear you, and I want this to feel fair. I can do 10% off the total, which comes to $X. That's the best I can do while still being fair to the crew who worked hard on this.
+          </div>
+        </div>
+
+        <div class="script-item">
+          <div class="script-num">5</div>
+          <div class="script-text">
+            <strong>Splitting the Difference</strong>
+            We did go over our quote here. Instead of you covering the full overage, let's split it — you pay half of the difference between the quote and the actual charge.
+            <em>Extreme measures only — reserve for real overages, not general dissatisfaction.</em>
+          </div>
+        </div>
+
+        <div class="script-item">
+          <div class="script-num">6</div>
+          <div class="script-text">
+            <strong>When It's Going Over 15%</strong>
+            To the customer: "I want to make this right, and I need to run this by my Regional Manager before I can give you a number — I'll have an answer for you by tomorrow." To yourself: this is not your call to make solo, get RM/Claims on it now.
+          </div>
+        </div>
+
+        <div class="script-item">
+          <div class="script-num">7</div>
+          <div class="script-text">
+            <strong>Charge It to the Game</strong>
+            If it's inside the 15% line — or already approved by RM/Claims — and the customer is still unhappy after everything, take the resolution and move on. Don't relitigate a $40 gesture that closed the account clean.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-left">
+        <strong>Source:</strong> Trainer notes — customer discount / escalation philosophy, adapted for CTXH branch managers.
+      </div>
+      <div class="footer-right">
+        Einstein Moving Co. &middot; Internal use only
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function calcPercent() {
+      const total = parseFloat(document.getElementById('moveTotal').value) || 0;
+      const rows = document.querySelectorAll('#percentOutput .calc-row');
+      const fmt = (n) => '$' + n.toFixed(2);
+      rows[0].querySelector('strong').textContent = fmt(total * 0.05);
+      rows[1].querySelector('strong').textContent = fmt(total * 0.10);
+      rows[2].querySelector('strong').textContent = fmt(total * 0.15);
+    }
+
+    function calcSplit() {
+      const quoted = parseFloat(document.getElementById('quotedTotal').value) || 0;
+      const actual = parseFloat(document.getElementById('actualTotal').value) || 0;
+      const overage = Math.max(actual - quoted, 0);
+      const split = overage / 2;
+      const customerPays = actual - split;
+      const rows = document.querySelectorAll('#splitOutput .calc-row');
+      const fmt = (n) => '$' + n.toFixed(2);
+      rows[0].querySelector('strong').textContent = fmt(overage);
+      rows[1].querySelector('strong').textContent = fmt(split);
+      rows[2].querySelector('strong').textContent = fmt(customerPays);
+
+      const pct = quoted > 0 ? (split / quoted) * 100 : 0;
+      document.getElementById('splitPct').textContent = pct.toFixed(1) + '%';
+      document.getElementById('splitWarn').style.display = pct > 15 ? 'flex' : 'none';
+    }
+  </script>
+
+</body>
+</html>
