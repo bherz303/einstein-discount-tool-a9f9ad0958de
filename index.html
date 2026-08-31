@@ -555,6 +555,186 @@
 
     .claims-flag.show { display: block; }
 
+    /* ── DOLLAR-FIRST REC + HELPERS ── */
+    .rec-value { flex-wrap: wrap; }
+
+    .rec-dollar-big {
+      font-size: 34px;
+      font-weight: 900;
+      color: var(--orange);
+      line-height: 1.1;
+    }
+
+    .rec-pct-small {
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.65);
+    }
+
+    .helper-box {
+      background: #FFF7ED;
+      border: 1px solid #FED7AA;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+    }
+
+    .helper-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+      color: #c2410c;
+      margin-bottom: 8px;
+    }
+
+    .helper-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .helper-row input {
+      width: 68px;
+      padding: 7px 8px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: 'Roboto', sans-serif;
+      color: var(--dark);
+    }
+
+    .helper-row input:focus { outline: none; border-color: var(--blue); }
+
+    .helper-x, .helper-eq { font-weight: 700; color: var(--gray); }
+
+    .helper-row #emResult {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--dark);
+      min-width: 60px;
+    }
+
+    .helper-use {
+      margin-left: auto;
+      background: var(--orange);
+      color: white;
+      border: none;
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .helper-use:hover { filter: brightness(0.95); }
+
+    .helper-note {
+      font-size: 11.5px;
+      color: #7c2d12;
+      margin-top: 8px;
+      line-height: 1.45;
+    }
+
+    .final-offer {
+      background: var(--light);
+      border: 2px solid var(--blue);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+    }
+
+    .final-offer > label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--dark);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .final-offer-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .final-offer-row #offerDollar {
+      width: 120px;
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 700;
+      font-family: 'Roboto', sans-serif;
+      color: var(--dark);
+    }
+
+    .final-offer-row #offerDollar:focus { outline: none; border-color: var(--blue); }
+
+    .final-offer-row #offerDollar.over-cap {
+      border-color: var(--red);
+      background: #FEF2F2;
+      color: var(--red);
+    }
+
+    .offer-echo { font-size: 13px; color: var(--gray); font-weight: 700; }
+
+    .offer-reset {
+      margin-left: auto;
+      background: none;
+      border: 1px solid #d1d5db;
+      color: var(--gray);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      cursor: pointer;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .offer-reset:hover { border-color: var(--blue); color: var(--blue); }
+
+    .final-offer-hint {
+      font-size: 11px;
+      color: var(--gray);
+      font-style: italic;
+      margin-top: 8px;
+    }
+
+    /* ── DELAY FACTOR ITEMS ── */
+    .delay-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .delay-detail-row {
+      display: flex;
+      gap: 8px;
+      margin-left: 26px;
+    }
+
+    .delay-detail-row .choices-note {
+      margin-left: 0;
+      flex: 1;
+    }
+
+    .delay-hours input {
+      width: 74px;
+      padding: 7px 8px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-family: 'Roboto', sans-serif;
+      color: var(--dark);
+    }
+
+    .delay-hours input:focus { outline: none; border-color: var(--blue); }
+
     /* ── SLIDER ── */
     .slider-block {
       margin-bottom: 18px;
@@ -584,30 +764,6 @@
       font-size: 10px;
       color: var(--gray);
       margin-top: 4px;
-    }
-
-    /* ── SCRIPT BOX ── */
-    .script-box {
-      background: #EFF6FF;
-      border: 1px solid #BFDBFE;
-      border-radius: 10px;
-      padding: 14px 16px;
-      margin-bottom: 16px;
-    }
-
-    .script-box .script-title {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--blue);
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .script-box p {
-      font-size: 13px;
-      color: var(--dark);
-      line-height: 1.5;
     }
 
     /* ── SUMMARY ── */
@@ -670,7 +826,7 @@
       .field-row { flex-direction: column; align-items: flex-start; }
       .field-row label { width: auto; }
       .field-hint { margin-left: 0; }
-      .field-trio { grid-template-columns: 1fr; }
+      .field-trio, .field-trio.duo { grid-template-columns: 1fr 1fr; }
       .header { flex-direction: column; align-items: flex-start; }
     }
   </style>
@@ -684,11 +840,12 @@
       <div class="header-divider"></div>
       <div class="header-title">
         <h1>Discount Decision Tool</h1>
-        <p>Pick your branch, enter the case facts, get the recommended discount, the reasoning, and the words to use.</p>
+        <p>Pick your branch, enter the case facts, and land on a fair dollar amount to offer — with the reasoning documented.</p>
       </div>
     </div>
     <div class="header-right">
-      <a class="header-link" href="playbook.html">← Playbook Reference</a>
+      <a class="header-link" href="scenarios.html">Scenarios &amp; Strategies</a>
+      <a class="header-link" href="playbook.html">Playbook Reference</a>
       <div class="header-badge">Company-Wide Manager Tool</div>
     </div>
   </div>
@@ -698,7 +855,7 @@
     <!-- ESCALATION RULE -->
     <div class="escalation-banner">
       <span class="esc-icon">⚠️</span>
-      <span><strong>Hard rule:</strong> Any discount over 15% of the move total cannot be offered on your own authority. It must be reviewed and discussed with your Regional Manager and/or the Claims department head <strong>before</strong> it goes to the customer. This tool will flag it if you get there.</span>
+      <span><strong>Hard rule:</strong> A manager can offer up to <strong>$500</strong> on their own authority. Any discount above that must be reviewed with your Regional Manager (RM) or the CET (Customer Experience Team) <strong>before</strong> it goes to the customer. It's the dollar amount that matters, not the percentage — a $300 discount on a $600 move is fine; a $700 discount on a $4,000 move needs a sign-off. This tool flags it when you cross the line.</span>
     </div>
 
     <div class="tool-grid">
@@ -795,18 +952,56 @@
 
         <div class="card" id="delayCard">
           <h2>3. Legitimate Delay Factors</h2>
-          <div class="card-sub">Things that justify extra time — not the crew's fault. It takes 2 legit factors checked here to cancel out one value issue below (2-to-1) — a real values breakdown outweighs a reasonable delay.</div>
+          <div class="card-sub">Things that justify extra time — not the crew's fault. It takes 2 legit factors checked here to cancel out one value issue below (2-to-1) — a real values breakdown outweighs a reasonable delay. For each one, note what happened and roughly how much time it added — that's the first thing a reviewer will want to know.</div>
 
-          <div class="checkbox-group">
-            <label class="checkbox-row"><input type="checkbox" onchange="recalc()" /> Furniture disassembly/reassembly (beds, cribs, exercise equipment)</label>
-            <label class="checkbox-row"><input type="checkbox" onchange="recalc()" /> Appliance modification (fridge doors, disconnect/reconnect)</label>
-            <label class="checkbox-row"><input type="checkbox" onchange="recalc()" /> Tight access (stairs, elevators, long carry, doorways)</label>
-            <label class="checkbox-row"><input type="checkbox" onchange="recalc()" /> Additional items not on original inventory</label>
-            <label class="checkbox-row"><input type="checkbox" onchange="recalc()" /> Weather or road delay</label>
-            <label class="checkbox-row"><input type="checkbox" id="delayOtherCheck" onchange="recalc()" /> Other legitimate factor</label>
-          </div>
-          <div class="text-input-row">
-            <input type="text" id="delayOtherText" placeholder="Describe the other factor..." oninput="recalc()" />
+          <div class="choices-list" id="delayList">
+            <div class="delay-item">
+              <label class="checkbox-row"><input type="checkbox" data-code="disassembly" data-name="Furniture disassembly/reassembly" onchange="recalc()" /> Furniture disassembly/reassembly (beds, cribs, exercise equipment)</label>
+              <div class="delay-detail-row">
+                <input type="text" class="choices-note" id="delaynote-disassembly" placeholder="What was disassembled/reassembled?" oninput="recalc()" />
+                <span class="delay-hours"><input type="number" step="0.5" id="delayhrs-disassembly" placeholder="+ hrs" oninput="recalc()" /></span>
+              </div>
+            </div>
+
+            <div class="delay-item">
+              <label class="checkbox-row"><input type="checkbox" data-code="appliance" data-name="Appliance modification" onchange="recalc()" /> Appliance modification (fridge doors, disconnect/reconnect)</label>
+              <div class="delay-detail-row">
+                <input type="text" class="choices-note" id="delaynote-appliance" placeholder="What appliance work was needed?" oninput="recalc()" />
+                <span class="delay-hours"><input type="number" step="0.5" id="delayhrs-appliance" placeholder="+ hrs" oninput="recalc()" /></span>
+              </div>
+            </div>
+
+            <div class="delay-item">
+              <label class="checkbox-row"><input type="checkbox" data-code="access" data-name="Tight access" onchange="recalc()" /> Tight access (stairs, elevators, long carry, doorways)</label>
+              <div class="delay-detail-row">
+                <input type="text" class="choices-note" id="delaynote-access" placeholder="What made access difficult?" oninput="recalc()" />
+                <span class="delay-hours"><input type="number" step="0.5" id="delayhrs-access" placeholder="+ hrs" oninput="recalc()" /></span>
+              </div>
+            </div>
+
+            <div class="delay-item">
+              <label class="checkbox-row"><input type="checkbox" data-code="additems" data-name="Additional items not on inventory" onchange="recalc()" /> Additional items not on original inventory</label>
+              <div class="delay-detail-row">
+                <input type="text" class="choices-note" id="delaynote-additems" placeholder="What extra items came up?" oninput="recalc()" />
+                <span class="delay-hours"><input type="number" step="0.5" id="delayhrs-additems" placeholder="+ hrs" oninput="recalc()" /></span>
+              </div>
+            </div>
+
+            <div class="delay-item">
+              <label class="checkbox-row"><input type="checkbox" data-code="weather" data-name="Weather or road delay" onchange="recalc()" /> Weather or road delay</label>
+              <div class="delay-detail-row">
+                <input type="text" class="choices-note" id="delaynote-weather" placeholder="What was the weather/road situation?" oninput="recalc()" />
+                <span class="delay-hours"><input type="number" step="0.5" id="delayhrs-weather" placeholder="+ hrs" oninput="recalc()" /></span>
+              </div>
+            </div>
+
+            <div class="delay-item">
+              <label class="checkbox-row"><input type="checkbox" data-code="delayother" data-name="Other legitimate factor" onchange="recalc()" /> Other legitimate factor</label>
+              <div class="delay-detail-row">
+                <input type="text" class="choices-note" id="delaynote-delayother" placeholder="Describe the other factor..." oninput="recalc()" />
+                <span class="delay-hours"><input type="number" step="0.5" id="delayhrs-delayother" placeholder="+ hrs" oninput="recalc()" /></span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -954,28 +1149,40 @@
           </div>
 
           <div class="recommend-box">
-            <div class="rec-label">Recommended Discount</div>
+            <div class="rec-label">Suggested Starting Point</div>
             <div class="rec-value">
-              <span id="recPct">0.0%</span>
-              <span class="rec-dollar" id="recDollar">$0.00</span>
+              <span class="rec-dollar-big" id="recDollar">$0</span>
+              <span class="rec-pct-small" id="recPct">enter facts</span>
             </div>
-            <div class="rec-note" id="recNote">Enter case facts to generate a recommendation.</div>
+            <div class="rec-note" id="recNote">Enter case facts to generate a suggestion. This is a starting point — you land on the final dollar amount below.</div>
           </div>
 
-          <div class="escalate-flag" id="escalateFlag">⚠️ This exceeds 15% of the move total. Do not offer this yourself — review with your Regional Manager and/or the Claims department head first.</div>
-
-          <div class="claims-flag" id="claimsFlag">🗂️ A damage claim is already filed for this move. Discuss this discount with the Claims department before finalizing — the total resolution (this discount plus whatever Claims pays out) needs to be decided together, not as two separate numbers.</div>
-
-          <div class="slider-block">
-            <div class="slider-label"><span>Adjust the actual offer</span><strong id="sliderVal">0.0%</strong></div>
-            <input type="range" id="offerSlider" min="0" max="25" step="0.5" value="0" oninput="onSlider()" />
-            <div class="slider-ticks"><span>0%</span><span>5%</span><span>10%</span><span>15% (max)</span><span>20%</span><span>25%</span></div>
+          <div class="helper-box">
+            <div class="helper-title">Extra-mover / time-based helper (optional)</div>
+            <div class="helper-row">
+              <input type="number" id="emHours" placeholder="hrs" oninput="emCalc()" />
+              <span class="helper-x">×</span>
+              <input type="number" id="emRate" placeholder="$/hr" oninput="emCalc()" />
+              <span class="helper-eq">=</span>
+              <strong id="emResult">$0</strong>
+              <button type="button" class="helper-use" onclick="useHelper()">Use as offer</button>
+            </div>
+            <div class="helper-note"><strong>Land on a fixed dollar amount.</strong> Never offer "a free mover" or "a percentage of their time." If an extra mover was on the job ~4 hrs at $80/hr, that's a $320 discount — you pick that fixed number so it's not open-ended if the day runs long.</div>
           </div>
 
-          <div class="script-box">
-            <div class="script-title">Suggested Script</div>
-            <p id="scriptText">Fill in the case facts above to get suggested language.</p>
+          <div class="final-offer">
+            <label for="offerDollar">Final discount to offer ($)</label>
+            <div class="final-offer-row">
+              <input type="number" id="offerDollar" placeholder="0" oninput="onOffer()" />
+              <span class="offer-echo" id="offerEcho">= 0% of move total</span>
+              <button type="button" class="offer-reset" onclick="resetOffer()">Reset to suggested</button>
+            </div>
+            <div class="final-offer-hint">Adjust freely — for partial-time movers or uneven hours, set the number that fits the situation. The dollar figure is what matters.</div>
           </div>
+
+          <div class="escalate-flag" id="escalateFlag">⚠️ This offer is over $500. Do not offer it yourself — review with your Regional Manager (RM) or the CET first.</div>
+
+          <div class="claims-flag" id="claimsFlag">🗂️ A damage claim is already filed for this move. Discuss this discount with the CET / Claims before finalizing — the total resolution (this discount plus whatever the claim pays out) needs to be decided together, not as two separate numbers.</div>
 
         </div>
 
@@ -1004,10 +1211,11 @@
 
   <script>
     const fmtDollar = (n) => '$' + (isFinite(n) ? n : 0).toFixed(2);
+    const fmtMoney = (n) => '$' + Math.round(isFinite(n) ? n : 0).toLocaleString('en-US');
     const fmtPct = (n) => (isFinite(n) ? n : 0).toFixed(1) + '%';
 
-    let lastRecommendedPct = 0;
-    let userMovedSlider = false;
+    const SOLO_CAP = 500; // a manager's solo authority ceiling, in dollars. Leadership is finalizing the exact cap ($500–$1,000); leaning $500.
+    let userSetOffer = false;
 
     function countChecks(container) {
       return container.querySelectorAll('input[type="checkbox"]:checked').length;
@@ -1016,6 +1224,41 @@
     function getNoteText(code) {
       const el = document.getElementById('note-' + code);
       return el ? el.value.trim() : '';
+    }
+
+    function getDelayNote(code) {
+      const el = document.getElementById('delaynote-' + code);
+      return el ? el.value.trim() : '';
+    }
+
+    function getDelayHrs(code) {
+      const el = document.getElementById('delayhrs-' + code);
+      return el && el.value !== '' ? parseFloat(el.value) : null;
+    }
+
+    function emCalc() {
+      const h = parseFloat(document.getElementById('emHours').value) || 0;
+      const r = parseFloat(document.getElementById('emRate').value) || 0;
+      const v = h * r;
+      document.getElementById('emResult').textContent = fmtMoney(v);
+      return v;
+    }
+
+    function useHelper() {
+      const v = emCalc();
+      userSetOffer = true;
+      document.getElementById('offerDollar').value = v ? Math.round(v) : '';
+      recalc();
+    }
+
+    function onOffer() {
+      userSetOffer = true;
+      recalc();
+    }
+
+    function resetOffer() {
+      userSetOffer = false;
+      recalc();
     }
 
     function recalc() {
@@ -1055,7 +1298,7 @@
       const rate = actualHrs > 0 ? moveTotal / actualHrs : 0;
 
       document.getElementById('statVariance').textContent =
-        (moveTotal && estOnSiteDollars) ? (moneyVariance > 0 ? '+' : '') + fmtDollar(moneyVariance) : '—';
+        (moveTotal && estOnSiteDollars) ? (moneyVariance > 0 ? '+' : '') + fmtMoney(moneyVariance) : '—';
       document.getElementById('statVariance').parentElement.classList.remove('pos', 'neg');
       if (moveTotal && estOnSiteDollars) {
         document.getElementById('statVariance').parentElement.classList.add(moneyVariance > 0 ? 'pos' : 'neg');
@@ -1119,14 +1362,11 @@
           driver = 'values';
           recPct = netServicePct;
           recDollar = moveTotal * (recPct / 100);
-          const severe = netServicePct > 15;
-          verdict = severe ? 'Severe — Multiple Values Breakdown' : 'Service Issue — Not a Time Dispute';
+          verdict = 'Service Issue — Not a Time Dispute';
           verdictClass = 'red';
-          explain = severe
-            ? 'This many unresolved values issues is a pattern, not a one-off — it goes past a simple discount conversation. Loop in your Regional Manager and/or the Claims department head before you go back to the customer, and open a separate coaching/HR conversation with the crew.'
-            : 'This isn\'t primarily a time-and-estimate question — it traces back to a core values breakdown on site. Use the value(s) below to guide the coaching conversation with the crew, separate from what you offer the customer.';
-          note = serviceCount + ' issue(s) × 5% = ' + fmtPct(grossServicePct) + (delayCount ? ' − ' + delayCount + ' legit factor(s) × 2.5% (2-to-1 offset) = ' + fmtPct(canceledPct) + ' canceled' : '') + ' → net ' + fmtPct(netServicePct) + '. Starting point only — use judgment on severity beyond the math.';
-          script = 'I\'m sorry this happened — this isn\'t the standard we hold ourselves to. Let me look into exactly what went wrong and I\'ll follow up tomorrow with how we\'re going to make it right.';
+          explain = 'This isn\'t primarily a time-and-estimate question — it traces back to a core values breakdown on site. Use the value(s) below to guide the coaching conversation with the crew, separate from what you offer the customer. Land on a dollar amount that fits the impact.';
+          note = serviceCount + ' issue(s) × 5% = ' + fmtPct(grossServicePct) + (delayCount ? ' − ' + delayCount + ' legit factor(s) × 2.5% (2-to-1 offset) = ' + fmtPct(canceledPct) + ' canceled' : '') + ' → net ' + fmtPct(netServicePct) + ' of move total as a starting point. The dollar figure is what you land on — adjust it below.';
+          script = '';
         } else {
           driver = 'time';
           recPct = timeBasedPct;
@@ -1158,96 +1398,98 @@
       }
 
       if (damageFiled) {
-        note += ' Note: a damage claim is already filed — this number excludes any separate claims payout. Coordinate with Claims on the total resolution before finalizing.';
+        note += ' Note: a damage claim is already filed — this figure excludes any separate claims payout. Coordinate with the CET / Claims on the total resolution before finalizing.';
       }
 
       document.getElementById('recNote').textContent = note;
-      document.getElementById('scriptText').textContent = script;
 
-      lastRecommendedPct = recPct;
-      document.getElementById('recPct').textContent = fmtPct(recPct);
-      document.getElementById('recDollar').textContent = fmtDollar(recDollar);
+      const suggestedDollar = Math.round(recDollar);
+      document.getElementById('recDollar').textContent = fmtMoney(suggestedDollar);
+      document.getElementById('recPct').textContent = (moveTotal > 0 && recPct > 0) ? '≈ ' + fmtPct(recPct) + ' of move total' : 'starting point';
 
-      const escalate = recPct > 15;
+      const offerInput = document.getElementById('offerDollar');
+      if (!userSetOffer) {
+        offerInput.value = suggestedDollar ? suggestedDollar : '';
+      }
+      const offerDollar = userSetOffer ? (parseFloat(offerInput.value) || 0) : suggestedDollar;
+      const offerPct = moveTotal > 0 ? (offerDollar / moveTotal) * 100 : 0;
+      document.getElementById('offerEcho').textContent = moveTotal > 0
+        ? '= ' + fmtPct(offerPct) + ' of move total'
+        : '= enter total charges for %';
+
+      const escalate = offerDollar > SOLO_CAP;
       document.getElementById('escalateFlag').classList.toggle('show', escalate);
       document.getElementById('claimsFlag').classList.toggle('show', damageFiled);
+      offerInput.classList.toggle('over-cap', escalate);
 
-      if (!userMovedSlider) {
-        document.getElementById('offerSlider').value = Math.min(Math.round(recPct * 2) / 2, 25);
-        updateSliderDisplay(moveTotal);
-      } else {
-        updateSliderDisplay(moveTotal);
-      }
-
-      buildSummary(branch, moveTotal, estOriginalDollars, estOriginalMovers, estOriginalHours, estOnSiteDollars, estOnSiteMovers, estOnSiteHours, actualMovers, actualHrs, hasDelay, hasService, checkedValues, verdict, recPct, recDollar, escalate, driver, serviceCount, delayCount, canceledPct, netServicePct, damageFiled);
+      buildSummary({
+        branch: branch, moveTotal: moveTotal,
+        estOriginalDollars: estOriginalDollars, estOriginalMovers: estOriginalMovers, estOriginalHours: estOriginalHours,
+        estOnSiteDollars: estOnSiteDollars, estOnSiteMovers: estOnSiteMovers, estOnSiteHours: estOnSiteHours,
+        actualMovers: actualMovers, actualHrs: actualHrs,
+        moneyVariance: moneyVariance, hoursVariance: hoursVariance,
+        hasDelay: hasDelay, hasService: hasService, checkedValues: checkedValues,
+        verdict: verdict, recPct: recPct, recDollar: suggestedDollar, driver: driver,
+        serviceCount: serviceCount, delayCount: delayCount, canceledPct: canceledPct, netServicePct: netServicePct,
+        offerDollar: offerDollar, offerPct: offerPct, escalate: escalate, damageFiled: damageFiled
+      });
     }
 
-    function onSlider() {
-      userMovedSlider = true;
-      const moveTotal = parseFloat(document.getElementById('moveTotal').value) || 0;
-      updateSliderDisplay(moveTotal);
-      recalcSummaryOnly();
-    }
-
-    function updateSliderDisplay(moveTotal) {
-      const pct = parseFloat(document.getElementById('offerSlider').value) || 0;
-      document.getElementById('sliderVal').textContent = fmtPct(pct) + ' = ' + fmtDollar(moveTotal * (pct / 100));
-      const slider = document.getElementById('offerSlider');
-      if (pct > 15) {
-        slider.style.accentColor = 'var(--red)';
-      } else {
-        slider.style.accentColor = '';
-      }
-    }
-
-    function recalcSummaryOnly() {
-      // re-run full recalc so summary text reflects slider-adjusted offer too
-      recalc();
-    }
-
-    function buildSummary(branch, moveTotal, estOriginalDollars, estOriginalMovers, estOriginalHours, estOnSiteDollars, estOnSiteMovers, estOnSiteHours, actualMovers, actualHrs, hasDelay, hasService, checkedValues, verdict, recPct, recDollar, escalate, driver, serviceCount, delayCount, canceledPct, netServicePct, damageFiled) {
-      const delayOtherText = document.getElementById('delayOtherText').value.trim();
+    function buildSummary(s) {
       const damageNotesText = document.getElementById('damageNotesText').value.trim();
-      const offerPct = parseFloat(document.getElementById('offerSlider').value) || 0;
-      const offerDollar = moveTotal * (offerPct / 100);
-      const offerEscalate = offerPct > 15;
+      const fmtHrs = (h) => (h || 0).toFixed(1) + ' hrs';
 
-      const delayNotes = document.getElementById('delayCard').querySelectorAll('input[type="checkbox"]:checked');
+      // Delay factor detail lines with per-factor notes + hours added
+      const delayLines = [];
+      Array.from(document.querySelectorAll('#delayList .delay-item')).forEach(item => {
+        const cb = item.querySelector('input[type="checkbox"]');
+        if (cb && cb.checked) {
+          const code = cb.dataset.code;
+          const dnote = getDelayNote(code);
+          const dhrs = getDelayHrs(code);
+          delayLines.push('  - ' + cb.dataset.name + ': ' + (dnote || '(no detail entered)') + (dhrs !== null ? ' (+' + dhrs.toFixed(1) + 'h)' : ''));
+        }
+      });
 
-      const delayLabels = Array.from(delayNotes).map(cb => cb.closest('label').textContent.trim());
-      const valueLabels = checkedValues.map(v => v.name + (v.note ? ' [' + v.note + ']' : ''));
+      const serviceLines = s.checkedValues.map(v => '  - ' + v.name + ': ' + (v.note || '(no detail entered)'));
 
       let lines = [];
       lines.push('DISCOUNT CASE SUMMARY');
-      lines.push('Branch: ' + (branch || 'Not selected'));
-      lines.push('Original estimate: ' + fmtDollar(estOriginalDollars) + ' | ' + (estOriginalMovers || 0) + ' movers | ' + (estOriginalHours || 0).toFixed(1) + ' hrs');
-      lines.push('On-site estimate: ' + fmtDollar(estOnSiteDollars) + ' | ' + (estOnSiteMovers || 0) + ' movers | ' + (estOnSiteHours || 0).toFixed(1) + ' hrs');
-      lines.push('Actual: ' + (actualMovers || 0) + ' movers | ' + (actualHrs || 0).toFixed(1) + ' hrs');
-      lines.push('Total move charges: ' + fmtDollar(moveTotal));
+      lines.push('Branch: ' + (s.branch || 'Not selected'));
       lines.push('');
-      lines.push('Delay factors: ' + (delayLabels.length ? delayLabels.join('; ') : 'None noted') + (delayOtherText ? ' — ' + delayOtherText : ''));
-      lines.push('CHOICES values implicated: ' + (valueLabels.length ? valueLabels.join('; ') : 'None noted'));
-      if (hasService) {
-        lines.push('Values-based math: ' + serviceCount + ' issue(s) x 5% - ' + delayCount + ' legit factor(s) x 2.5% (2-to-1) = ' + fmtPct(canceledPct) + ' canceled -> net ' + fmtPct(netServicePct) + (driver === 'values' ? ' (this drove the recommendation)' : ' (time math was higher, drove the recommendation instead)'));
-      }
-      lines.push('');
-      lines.push('Verdict: ' + verdict);
-      lines.push('System recommendation: ' + fmtPct(recPct) + ' (' + fmtDollar(recDollar) + ')');
-      lines.push('Offer selected: ' + fmtPct(offerPct) + ' (' + fmtDollar(offerDollar) + ')');
-      if (offerEscalate) {
-        lines.push('ESCALATION REQUIRED — offer exceeds 15% of move total. Reviewed with RM/Claims: ___________');
-      }
-      if (driver === 'values' && netServicePct > 15) {
-        lines.push('SEVERE — multiple uncanceled values issues. This is a coaching/HR conversation, not just a discount decision.');
-      }
-      if (valueLabels.length) {
-        lines.push('');
-        lines.push('Coaching follow-up (separate from customer resolution): address ' + valueLabels.join(', ') + ' with the crew.');
+      lines.push('ESTIMATES & CHARGES');
+      lines.push('  Original estimate: ' + fmtMoney(s.estOriginalDollars) + ' | ' + (s.estOriginalMovers || 0) + ' movers | ' + fmtHrs(s.estOriginalHours));
+      lines.push('  On-site estimate:  ' + fmtMoney(s.estOnSiteDollars) + ' | ' + (s.estOnSiteMovers || 0) + ' movers | ' + fmtHrs(s.estOnSiteHours));
+      lines.push('  Actual:            ' + (s.actualMovers || 0) + ' movers | ' + fmtHrs(s.actualHrs));
+      lines.push('  Total charged:     ' + fmtMoney(s.moveTotal));
+      if (s.moveTotal && s.estOnSiteDollars) {
+        lines.push('  Vs on-site est:    ' + (s.moneyVariance > 0 ? '+' : '') + fmtMoney(s.moneyVariance) + (s.actualHrs && s.estOnSiteHours ? '  |  ' + (s.hoursVariance > 0 ? '+' : '') + s.hoursVariance.toFixed(1) + ' hrs' : ''));
       }
       lines.push('');
-      lines.push('Damage claim already filed: ' + (damageFiled ? 'YES' : 'No') + (damageFiled && damageNotesText ? ' — ' + damageNotesText : ''));
-      if (damageFiled) {
-        lines.push('COORDINATE WITH CLAIMS — this discount excludes any separate claims payout. Decide the total resolution together before finalizing with the customer.');
+      lines.push('LEGITIMATE DELAY FACTORS');
+      lines.push(delayLines.length ? delayLines.join('\n') : '  None noted');
+      lines.push('');
+      lines.push('SERVICE ISSUES (CHOICES)');
+      lines.push(serviceLines.length ? serviceLines.join('\n') : '  None noted');
+      if (s.hasService) {
+        lines.push('  Values math: ' + s.serviceCount + ' issue(s) x 5% - ' + s.delayCount + ' delay factor(s) x 2.5% (2-to-1) = ' + fmtPct(s.canceledPct) + ' offset -> net ' + fmtPct(s.netServicePct) + (s.driver === 'values' ? ' (drove the suggestion)' : ' (time math was higher)'));
+      }
+      lines.push('');
+      lines.push('RECOMMENDATION');
+      lines.push('  Verdict: ' + s.verdict);
+      lines.push('  System starting point: ' + fmtMoney(s.recDollar) + (s.moveTotal > 0 && s.recPct > 0 ? ' (~' + fmtPct(s.recPct) + ')' : ''));
+      lines.push('  FINAL DISCOUNT TO OFFER: ' + fmtMoney(s.offerDollar) + (s.moveTotal > 0 ? ' (~' + fmtPct(s.offerPct) + ')' : ''));
+      if (s.escalate) {
+        lines.push('  >> ESCALATION REQUIRED — over the $500 solo cap. Reviewed/approved by RM or CET: ______________');
+      }
+      if (s.checkedValues.length) {
+        lines.push('  Coaching follow-up (separate from customer resolution): address ' + s.checkedValues.map(v => v.name).join(', ') + ' with the crew.');
+      }
+      lines.push('');
+      lines.push('DAMAGE CLAIM');
+      lines.push('  Already filed: ' + (s.damageFiled ? 'YES' : 'No') + (s.damageFiled && damageNotesText ? ' — ' + damageNotesText : ''));
+      if (s.damageFiled) {
+        lines.push('  >> COORDINATE WITH CET / CLAIMS — this discount is separate from any claim payout. Decide the total resolution together before finalizing.');
       }
 
       document.getElementById('summaryText').value = lines.join('\n');

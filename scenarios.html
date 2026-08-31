@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Internal Tool</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --orange: #EF8B22;
+      --blue: #0979C3;
+      --dark: #27343D;
+      --gray: #53575A;
+      --light: #F6F6F6;
+      --green: #22C55E;
+      --red: #DC2626;
+      --yellow: #F59E0B;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--light);
+      color: var(--gray);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: var(--dark);
+      padding: 28px 40px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .header-left { display: flex; align-items: center; gap: 20px; }
+    .header img { height: 40px; filter: brightness(0) invert(1); }
+    .header-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.2); }
+    .header-title h1 { font-size: 22px; font-weight: 900; color: var(--white); letter-spacing: -0.3px; }
+    .header-title p { font-size: 13px; color: rgba(255,255,255,0.65); margin-top: 2px; }
+    .header-right { display: flex; align-items: center; gap: 10px; }
+
+    .header-badge {
+      background: var(--orange);
+      color: white;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .header-link {
+      color: rgba(255,255,255,0.7);
+      font-size: 12px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 6px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .header-link:hover { color: white; border-color: rgba(255,255,255,0.5); }
+
+    .page { max-width: 1000px; margin: 0 auto; padding: 28px 24px 48px; }
+
+    /* ── GOLDEN RULE ── */
+    .golden {
+      background: #FFF7ED;
+      border: 2px solid var(--orange);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+    }
+
+    .golden h2 {
+      font-size: 15px;
+      font-weight: 900;
+      color: #c2410c;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .golden p { font-size: 14px; color: var(--dark); line-height: 1.55; }
+    .golden .never { color: var(--red); font-weight: 700; }
+    .golden .do { color: #15803d; font-weight: 700; }
+
+    /* ── DRAFT NOTE ── */
+    .draft-note {
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      border-left: 4px solid var(--blue);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 28px;
+      font-size: 12.5px;
+      color: #1e40af;
+      line-height: 1.5;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .section-header h2 { font-size: 17px; font-weight: 900; color: var(--dark); }
+
+    /* ── SCENARIO CARDS ── */
+    .scenario {
+      background: var(--white);
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .scenario-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .scenario-num {
+      width: 34px;
+      height: 34px;
+      background: var(--orange);
+      color: white;
+      font-size: 15px;
+      font-weight: 900;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .scenario-head h3 { font-size: 15px; font-weight: 900; color: var(--dark); }
+    .scenario-head .tagline { font-size: 12px; color: var(--gray); margin-top: 1px; }
+
+    .scenario-body { padding: 6px 20px 18px; }
+
+    .srow { padding: 12px 0; border-bottom: 1px solid #f6f7f8; }
+    .srow:last-child { border-bottom: none; }
+
+    .srow .label {
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--orange);
+      margin-bottom: 5px;
+    }
+
+    .srow .label.land { color: var(--blue); }
+    .srow p { font-size: 13.5px; color: var(--dark); line-height: 1.55; }
+    .srow ul { margin: 4px 0 0 18px; }
+    .srow li { font-size: 13.5px; color: var(--dark); line-height: 1.5; margin-bottom: 3px; }
+
+    .land-box {
+      background: #EFF6FF;
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+
+    .land-box p { color: #1e3a5f; }
+    .land-box strong { color: var(--blue); }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--white);
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .footer-left { font-size: 13px; color: var(--gray); }
+    .footer-left strong { color: var(--dark); }
+    .footer-right { font-size: 12px; color: var(--gray); text-align: right; }
+
+    /* ── CASE STUDY ── */
+    .case-study {
+      background: var(--white);
+      border: 2px solid var(--dark);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .case-study-head {
+      background: var(--dark);
+      color: var(--white);
+      padding: 16px 20px;
+    }
+
+    .case-study-head h3 { font-size: 16px; font-weight: 900; }
+    .case-study-head .tagline { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 2px; }
+
+    .case-study-body { padding: 6px 20px 18px; }
+
+    .case-facts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .case-fact {
+      background: var(--light);
+      border-radius: 10px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .case-fact .cf-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--gray);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .case-fact .cf-value { font-size: 17px; font-weight: 900; color: var(--dark); }
+    .case-fact.bad .cf-value { color: var(--red); }
+
+    .wrong-box {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      border-left: 4px solid var(--red);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 14px 0;
+    }
+
+    .wrong-box .wb-label {
+      font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.6px; color: var(--red); margin-bottom: 5px;
+    }
+    .wrong-box p { font-size: 13.5px; color: #7f1d1d; line-height: 1.55; }
+
+    .lesson-list { margin: 6px 0 0; list-style: none; }
+    .lesson-list li {
+      font-size: 13.5px; color: var(--dark); line-height: 1.55;
+      padding: 8px 0 8px 26px; position: relative; border-bottom: 1px solid #f6f7f8;
+    }
+    .lesson-list li:last-child { border-bottom: none; }
+    .lesson-list li::before {
+      content: "✓"; position: absolute; left: 0; top: 8px;
+      color: var(--green); font-weight: 900;
+    }
+    .lesson-list li strong { color: var(--dark); }
+
+    .takeaway {
+      background: #FFF7ED;
+      border: 2px solid var(--orange);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 16px;
+      font-size: 14px;
+      color: var(--dark);
+      line-height: 1.55;
+    }
+    .takeaway strong { color: #c2410c; }
+
+    @media (max-width: 768px) {
+      .header { flex-direction: column; align-items: flex-start; }
+      .scenario-head { flex-wrap: wrap; }
+      .case-facts { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <img src="https://www.einsteinmoving.com/wp-content/uploads/2022/02/Einstein-Logo.svg" alt="Einstein Moving" />
+      <div class="header-divider"></div>
+      <div class="header-title">
+        <h1>Discount Scenarios &amp; Strategies</h1>
+        <p>Real-world situations and how to work through them — so you don't have to reinvent the wheel.</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <a class="header-link" href="index.html">← Decision Tool</a>
+      <a class="header-link" href="playbook.html">Playbook Reference</a>
+      <div class="header-badge">Company-Wide Manager Tool</div>
+    </div>
+  </div>
+
+  <div class="page">
+
+    <!-- GOLDEN RULE -->
+    <div class="golden">
+      <h2>🥇 The Golden Rule — Extra Movers Day-Of</h2>
+      <p>When we have to send an extra mover the day of, we <span class="never">never</span> use the wording "we'll give you a mover for free" or "a percentage of their time off." We <span class="do">always pick a dollar amount</span> that makes sense for the situation and offer that. Estimate the extra mover's time and rate to get to a fair figure (e.g. ~4 hrs × $80/hr ≈ $320), then commit to that fixed dollar amount — so it's never open-ended if the day runs long.</p>
+    </div>
+
+    <!-- DRAFT NOTE -->
+    <div class="draft-note">
+      <strong>Working draft.</strong> These five scenarios are starting points pulled from the most common patterns. The plan is to collect real situations from BMs across all branches, pool them into these themes, and sharpen the strategies with actual examples. If you've handled a case worth adding, send it to your RM.
+    </div>
+
+    <!-- SCENARIOS -->
+    <div class="section-header"><h2>Common Scenarios</h2></div>
+
+    <!-- 1 -->
+    <div class="scenario">
+      <div class="scenario-head">
+        <div class="scenario-num">1</div>
+        <div>
+          <h3>"The move took too long / went over the estimate"</h3>
+          <div class="tagline">The classic. Customer feels the crew was slow or the bill came in high.</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="srow">
+          <div class="label">Investigate first</div>
+          <ul>
+            <li>Pull the contract: original estimate, on-site estimate, and what was actually charged.</li>
+            <li>Compare against actual time and mover count. Did we beat the on-site estimate, or go over?</li>
+            <li>Talk to the crew — was there disassembly, tight access, extra items, or a real delay?</li>
+          </ul>
+        </div>
+        <div class="srow">
+          <div class="label">How to solve</div>
+          <p>Apologize for the frustration regardless. If the numbers were fair (at or under the on-site estimate), take the facts back and explain them plainly — don't lead with a discount. If we genuinely went over the on-site estimate without a good reason, lean toward covering that overage. If there was a legit reason, explain it and, if they still push, split the difference on the overage.</p>
+        </div>
+        <div class="srow">
+          <div class="label land">Where to land</div>
+          <div class="land-box"><p>A <strong>dollar amount</strong> tied to the overage — not a blanket % off the whole move. If the bill beat the estimate, the answer may be <strong>$0</strong> plus a clear explanation.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="scenario">
+      <div class="scenario-head">
+        <div class="scenario-num">2</div>
+        <div>
+          <h3>"We had to send extra movers day-of"</h3>
+          <div class="tagline">The most important one to get right. See the Golden Rule above.</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="srow">
+          <div class="label">Investigate first</div>
+          <ul>
+            <li>Why did we need the extra mover — our miscalculation, or a scope change on the customer's side?</li>
+            <li>How long was the extra mover actually on the job, and at what rate?</li>
+          </ul>
+        </div>
+        <div class="srow">
+          <div class="label">How to solve</div>
+          <p>If the extra mover was needed because <em>we</em> under-scoped the job, that time is on us. Estimate the extra mover's hours × rate to get a fair figure, then <span class="never" style="font-weight:700; color:var(--red)">pick a fixed dollar amount</span>. Never phrase it as "a free mover" or "a percentage of their time" — that reads as open-ended and can balloon if the day runs long.</p>
+        </div>
+        <div class="srow">
+          <div class="label land">Where to land</div>
+          <div class="land-box"><p>A <strong>fixed dollar amount</strong> ≈ estimated extra-mover hours × hourly rate (e.g. 4 hrs × $80 = <strong>$320</strong>). Use the Decision Tool's extra-mover helper to calculate it.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="scenario">
+      <div class="scenario-head">
+        <div class="scenario-num">3</div>
+        <div>
+          <h3>"Something was damaged"</h3>
+          <div class="tagline">Property or item damage — a claim may already be in motion.</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="srow">
+          <div class="label">Investigate first</div>
+          <ul>
+            <li>Is a damage claim already filed? If so, this is not a discount you decide alone.</li>
+            <li>What's the extent of the damage, and did the crew flag it on site or note pre-existing damage?</li>
+          </ul>
+        </div>
+        <div class="srow">
+          <div class="label">How to solve</div>
+          <p>Coordinate with the CET / Claims <strong>before</strong> offering anything. The claim payout and any goodwill discount need to be decided together as one total resolution — not stacked as two separate numbers. Any discount here is for the inconvenience/experience, separate from what the claim covers for the actual damage.</p>
+        </div>
+        <div class="srow">
+          <div class="label land">Where to land</div>
+          <div class="land-box"><p>Decided <strong>with the CET / Claims</strong>. Flag it in the Decision Tool (Damage Claim Status) so the total resolution is coordinated.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="scenario">
+      <div class="scenario-head">
+        <div class="scenario-num">4</div>
+        <div>
+          <h3>"The crew's attitude / communication was off"</h3>
+          <div class="tagline">A values breakdown, even when the time and price were fine.</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="srow">
+          <div class="label">Investigate first</div>
+          <ul>
+            <li>Which CHOICES value(s) did we miss — communication, attitude, attention to detail?</li>
+            <li>Get the crew's side. This is as much a coaching signal as a customer-resolution question.</li>
+          </ul>
+        </div>
+        <div class="srow">
+          <div class="label">How to solve</div>
+          <p>Apologize sincerely — this isn't the standard we hold ourselves to. The customer resolution (a modest goodwill dollar amount) is separate from the internal follow-up: log the values miss and coach the crew. Don't let a pricing discount stand in for the coaching conversation that actually needs to happen.</p>
+        </div>
+        <div class="srow">
+          <div class="label land">Where to land</div>
+          <div class="land-box"><p>A modest <strong>goodwill dollar amount</strong> for the experience, plus a documented coaching follow-up with the crew.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="scenario">
+      <div class="scenario-head">
+        <div class="scenario-num">5</div>
+        <div>
+          <h3>"Loyal / repeat customer with a minor gripe"</h3>
+          <div class="tagline">Small issue, but a relationship worth protecting.</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="srow">
+          <div class="label">Investigate first</div>
+          <ul>
+            <li>Is the complaint valid, or is it more about feeling heard? Both matter.</li>
+            <li>What's the customer's history with us — repeat mover, referrer, reviewer?</li>
+          </ul>
+        </div>
+        <div class="srow">
+          <div class="label">How to solve</div>
+          <p>Lead with listening and a genuine thank-you for their loyalty. For a genuinely minor issue, a small fixed goodwill gesture goes a long way and protects a high-value relationship. Keep it proportional — this is about goodwill, not fixing a real service failure.</p>
+        </div>
+        <div class="srow">
+          <div class="label land">Where to land</div>
+          <div class="land-box"><p>A small <strong>fixed goodwill dollar amount</strong>, framed as a thank-you for their loyalty.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEACHING LESSON -->
+    <div class="section-header" style="margin-top:32px;"><h2>Teaching Lesson — A Real Case</h2></div>
+
+    <div class="case-study">
+      <div class="case-study-head">
+        <h3>The Open-Ended Cap</h3>
+        <div class="tagline">A real service-recovery call, anonymized — and how the tool would have changed it.</div>
+      </div>
+      <div class="case-study-body">
+
+        <div class="srow">
+          <div class="label">What happened</div>
+          <p>A repeat customer who'd had a poor prior move was booked for a 3-mover / 5-hour job (15 man-hours) and quoted a total of $1,764. Scheduling forced a last-minute branch transfer, the crew arrived 2-for-3 (understaffed), and — because a booking rep had waved the customer off when she tried to give an inventory — the job was badly under-scoped. On site the crew re-estimated ~20 man-hours. It ultimately ran <strong>37.5 man-hours</strong> on a real mix of our failures (understaffing, no inventory) and day-of conditions (8th-floor logistics, a tiny destination unit, several people underfoot, the customer being very particular — and, near the end, the crew's read that she was milking the clock).</p>
+        </div>
+
+        <div class="case-facts">
+          <div class="case-fact"><span class="cf-label">Quoted Total</span><span class="cf-value">$1,764</span></div>
+          <div class="case-fact"><span class="cf-label">Actual Invoice</span><span class="cf-value">$3,825</span></div>
+          <div class="case-fact bad"><span class="cf-label">Discount Given</span><span class="cf-value">$2,061</span></div>
+          <div class="case-fact bad"><span class="cf-label">Est → Actual</span><span class="cf-value">20 → 37.5 hrs</span></div>
+        </div>
+
+        <div class="wrong-box">
+          <div class="wb-label">Where it went wrong</div>
+          <p>The manager committed to honoring the original $1,764 quote — which quietly turned it into an <strong>open-ended cap</strong>. The discount wasn't a number he chose; it was whatever the gap happened to be ($3,825 − $1,764 = $2,061). He locked that in when the expectation was ~20 man-hours, so every additional hour the job drifted — including customer-caused hours — grew our exposure. Service recovery <em>was</em> warranted; the way the number was set was not. It was also more than 4× what a manager should approve alone, decided solo on the phone.</p>
+        </div>
+
+        <div class="srow">
+          <div class="label">How this tool would have changed the call</div>
+          <ul class="lesson-list">
+            <li><strong>No open-ended cap.</strong> The tool only ever produces a <em>fixed dollar discount</em> chosen from the facts known at that moment — it never lets you peg the resolution to "honor the quote." Later drift to 37.5 hours couldn't have inflated it.</li>
+            <li><strong>It forces the escalation.</strong> Anything over the $500 solo cap flags for RM/CET sign-off before it's offered. A $2,061 resolution would have required a second set of eyes instead of a solo call under pressure.</li>
+            <li><strong>It separates our failures from day-of conditions.</strong> Understaffing and the inventory miss are service issues (a discount is owed); elevator logistics, the particular customer, and clock-milking are delay factors (not a discount to us). Itemizing them bounds the number instead of eating the whole gap.</li>
+            <li><strong>Per-factor hours make the overage legible.</strong> Logging how many hours each factor added answers "how much of the 17.5-hour overage is actually ours?" — and produces a defensible figure, not arithmetic off the invoice.</li>
+            <li><strong>The case summary arms the review.</strong> Because it clears $500, the auto-summary hands the RM every fact in the moment — instead of the rationale being reconstructed after the money was already committed.</li>
+          </ul>
+        </div>
+
+        <div class="takeaway">
+          <strong>The lesson:</strong> Service recovery was the right instinct — the mistake was the <em>shape</em> of the number. Commit a fixed dollar amount you choose, sized to what we actually broke; never a cap that floats with the final bill. And once you're past $500, it's not your call to make alone.
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-left">
+        <strong>Source:</strong> Trainer notes + BM-submitted scenarios (in progress) — customer discount / escalation philosophy, for all Einstein branch managers.
+      </div>
+      <div class="footer-right">
+        Einstein Moving Co. &middot; Internal use only
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
