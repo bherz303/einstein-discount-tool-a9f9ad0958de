@@ -855,7 +855,7 @@
     <!-- ESCALATION RULE -->
     <div class="escalation-banner">
       <span class="esc-icon">⚠️</span>
-      <span><strong>Hard rule:</strong> A manager can offer up to <strong>$500</strong> on their own authority. Any discount above that must be reviewed with your Regional Manager (RM) or the CET (Customer Experience Team) <strong>before</strong> it goes to the customer. It's the dollar amount that matters, not the percentage — a $300 discount on a $600 move is fine; a $700 discount on a $4,000 move needs a sign-off. This tool flags it when you cross the line.</span>
+      <span><strong>Hard rule:</strong> A manager can offer up to <strong>$500</strong> on their own authority (must provide a write-up for the decision). Any discount above that must be reviewed with your Branch Manager and Regional Manager (RM) or the CET (Customer Experience Team Lead) <strong>before</strong> it goes to the customer. It's the dollar amount that matters, not the percentage — a $300 discount on a $600 move is fine; a $700 discount on a $4,000 move needs a sign-off. This tool flags it when you cross the line.</span>
     </div>
 
     <div class="tool-grid">
@@ -1180,7 +1180,7 @@
             <div class="final-offer-hint">Adjust freely — for partial-time movers or uneven hours, set the number that fits the situation. The dollar figure is what matters.</div>
           </div>
 
-          <div class="escalate-flag" id="escalateFlag">⚠️ This offer is over $500. Do not offer it yourself — review with your Regional Manager (RM) or the CET first.</div>
+          <div class="escalate-flag" id="escalateFlag">⚠️ This offer is over $500. Do not offer it yourself — review with your Branch Manager and RM or the CET first, and keep the write-up (the case summary below) with the decision.</div>
 
           <div class="claims-flag" id="claimsFlag">🗂️ A damage claim is already filed for this move. Discuss this discount with the CET / Claims before finalizing — the total resolution (this discount plus whatever the claim pays out) needs to be decided together, not as two separate numbers.</div>
 
@@ -1480,7 +1480,7 @@
       lines.push('  System starting point: ' + fmtMoney(s.recDollar) + (s.moveTotal > 0 && s.recPct > 0 ? ' (~' + fmtPct(s.recPct) + ')' : ''));
       lines.push('  FINAL DISCOUNT TO OFFER: ' + fmtMoney(s.offerDollar) + (s.moveTotal > 0 ? ' (~' + fmtPct(s.offerPct) + ')' : ''));
       if (s.escalate) {
-        lines.push('  >> ESCALATION REQUIRED — over the $500 solo cap. Reviewed/approved by RM or CET: ______________');
+        lines.push('  >> ESCALATION REQUIRED — over the $500 solo cap. Reviewed/approved by BM + RM or CET: ______________');
       }
       if (s.checkedValues.length) {
         lines.push('  Coaching follow-up (separate from customer resolution): address ' + s.checkedValues.map(v => v.name).join(', ') + ' with the crew.');
